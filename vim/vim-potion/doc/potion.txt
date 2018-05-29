@@ -1,0 +1,99 @@
+*potion.txt* basic functionality for the potion programming language
+========================================================================
+INTRO                                                      *PotionIntro*
+
+                      ___      _   _              ~
+                     / _ \___ | |_(_) ___  _ __   ~
+                    / /_)/ _ \| __| |/ _ \| '_ \  ~
+                   / ___/ (_) | |_| | (_) | | | | ~
+                   \/    \___/ \__|_|\___/|_| |_| ~
+
+
+	   Functionality for the Potion programming language.
+	 Includes syntax highlighting, code folding, and more!
+
+		 Coded by Michal Idziorek <m.i@gmx.at>
+	   along the "Learn Vimscript the Hard Way" tutorial:
+	     http://learnvimscriptthehardway.stevelosh.com
+
+
+========================================================================
+CONTENTS                                                *PotionContents*
+
+    1. Usage .............. |PotionUsage|
+    2. Installation ....... |PotionInstall|
+    3. Files .............. |PotionFiles|
+    4. Credits ............ |PotionCredits|
+
+
+========================================================================
+USAGE		                                           *PotionUsage*
+
+This plugin will automatically provide syntax highlighting and folding
+for potion files (files ending in .pn).
+
+It remaps the section movement commands, to provide easy navigation
+through potion files:
+>
+    [[ ]] [] ][ 
+<
+
+The plugin offers mappings for invoking the potion compiler as well:
+
+Press <localleader>r for running the currently opened potion file.
+Press <localleader>b for showing its compiled bytecode in a new window.
+
+Set your maplocalleader in your .vimrc like this:
+>
+    let maplocalleader="\<space>"
+<
+
+You can set the path to the potion binary in your .vimrc too:
+>
+    let g:potion_command = "/home/miguel/int/dev/potion/bin/potion"
+<
+
+Otherwise the following default value will be used:
+>
+    let g:potion_command = "potion"
+<
+
+========================================================================
+INSTALLATION                                             *PotionInstall*
+
+Use Tim Pope's marvellous 'pathogen.vim' to simply put the potion plugin 
+into its own private directory. You can get Pathogen on GitHub:
+>
+    https://github.com/tpope/vim-pathogen
+<
+
+Use git to clone the plugin directly into its target directory to keep
+it up to date easily. 
+>
+   ~/.vim/bundle/potion/
+<
+
+========================================================================
+FILES		                                           *PotionFiles*
+
+The potion plugin ships with the following files:
+
+doc/potion.txt ................ Documentation (this file)
+ftdetect/potion.vim ........... Detection of potion files by .pn ending
+syntax/potion.vim ............. Syntax highlighting for .pn files
+syntax/potionbytecode.vim ..... Syntax highlighting for bytecode 
+ftplugin/potion/folding.vim ... Folding functionality
+ftplugin/potion/sections.vim .. Section movement via [[,]],[],][
+ftplugin/potion/running.vim ... Mappings for running the potion compiler
+autoload/potion/running.vim ... Functions for running the compiler
+
+
+========================================================================
+CREDITS                                                  *PotionCredits*
+
+This is my very first Vim plugin and it emerged during the course
+of reading Steve Losh' wonderful Vimscript tutorial:
+>
+    "Learn Vimscript the Hard Way". 
+    http://learnvimscriptthehardway.stevelosh.com
+<

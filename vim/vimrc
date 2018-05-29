@@ -1,0 +1,579 @@
+"""""""""""""""""""""""""""""""""""""
+"      Miguel's .vimrc              "
+"      Author: Michal Idziorek      "
+"      Last Update: 2018-05-29      "
+"""""""""""""""""""""""""""""""""""""
+
+" {{{ TODO / NOTES
+"
+" http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
+" set exrc 
+" set secure
+"
+" https://github.com/spf13/spf13-vim
+" http://antjanus.com/blog/thoughts-and-opinions/use-vim/
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+" http://derekingrouville.com/2012/vim-is-my-ide/
+" http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
+"
+"   * check out this plugins! (and many more from vim.org)
+"
+"       taglist.vim
+"       NerdTree                    DONE
+"       snipMate
+"       c.vim ?
+"       autocomplpop
+"       pathogen                    DONE
+"       minibufexpl                 DONE
+"       fugitive                    DONE
+"       vim-sensible                DONE
+"       surround
+"       perl-support ?
+"       matchit
+"       vimspell
+"       conqueshell
+"       fuzzyfinder
+"       Nerd Commenter
+"       tSkeleton
+"       grep
+"       cppcomplete
+"       colortest ?
+"       colour sampler pack
+"       gundo!
+"       CScope / CCTree
+"       inline reference/ (stlrefvim?)
+"       emmet.io (webdev)
+"
+"   * jump to definition / list calls
+"
+"   * spellcheck / translate / thesaurus
+"
+"   * change mappings to more specific mappings and use noremap!
+"
+"   * toggle 'cursorline' via hotkey for nicer reading experience.
+"
+"   * spellcheck
+"
+"   * ft=c.doxygen etc.
+"
+"   * include dependancies as git submodules (wherever possible)
+"       (check licenses first)
+"       
+"   * :help complete-functions
+"
+"   * spellcheck
+"
+"   * ctags shortcuts?
+"
+"   * quickfix
+"
+"   * compiler/debugger invocation
+"
+"   * implement a plugin for fast-reading (check if one exists first ;))
+"
+"   * release vim-colortune plugin 
+"
+"   * dictionary
+"
+"   * load layout automatically on start
+"
+"   * ConqueGDB Resize
+"
+"   * Do something about startup lag (because of YouCompleteMe)
+"
+"   * Do something about the input problems in ConqueGDB/Term (YouCompl?)
+"
+" }}}
+
+" {{{ Vundle - Plugin Manager
+"
+" Vundle plugin manager (Replaces pathogen)"
+" https://github.com/VundleVim/Vundle.vim
+set nocompatible              
+filetype off                  
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" github plugins
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'vim-scripts/Conque-GDB'
+
+" My own plugins on github
+" Plugin 'git://ex40.softwarefools.com/vim-potion.git'
+" Plugin 'git://ex40.softwarefools.com/vim-colortune.git'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" draculatheme.com
+" Plugin 'dracula/vim'
+" syntax on
+" color dracula
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" All of your Plugins must be added before the following line
+call vundle#end()            
+filetype plugin indent on
+
+" To ignore plugin indent changes, instead use:
+" filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+" }}}
+
+let g:ConqueGdb_Leader = '\'
+let g:ConqueTerm_CloseOnEnd = 1
+
+set nowrap
+set invlist
+
+" PATH
+" let $PATH='/home/miguel/opt/gcc-5.1.0/bin:'.$PATH
+" let $PATH='/home/miguel/opt/gcc-5.2.0/bin:'.$PATH
+
+" Basic Settings
+" {{{
+
+" let there be mapleaders
+" {{{
+" use <space> but remap to _ so it is visible for 'showcmd'
+nmap <space> _
+let mapleader="\_"
+let maplocalleader="\_"
+" }}}
+
+" filetype stuff
+" {{{
+filetype plugin indent on
+" }}}
+
+" misc!
+" {{{
+let g:potion_command = "/home/miguel/int/dev/potion/bin/potion"
+
+set nocompatible
+set backspace=2
+" set ruler
+set showcmd
+set number
+set hidden
+
+" set cursorcolumn
+" set cursorline
+
+" save before making etc.
+set autowrite
+
+" some nice candy
+set laststatus=2
+set wildmenu
+
+" indent
+set autoindent
+set cindent
+
+" mouse support in xterm
+set mouse=a
+
+"other
+set previewheight=25
+
+" http://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
+" set splitbelow
+" set splitright
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" }}}
+
+" set the status line
+" {{{
+set statusline=%f         " Path to the file
+set statusline+=%=        " Switch to the right side
+set statusline+=%l        " Current line
+set statusline+=/         " Separator
+set statusline+=%L        " Total lines
+set statusline+=,        " comma
+set statusline+=%c        " Column
+set statusline+=\ (%P)        " Percentage
+" }}}
+
+" terminal width / colorcolumn
+" {{{
+" http://richarddingwall.name/2008/05/31/is-the-80-character-line-limit-still-relevant/
+"
+" set tw=80
+" set tw=72
+" set tw=78 (for instance vims :help)
+set tw=0
+set colorcolumn=73
+" }}}
+
+" wrapping
+" {{{
+"set wrap
+"set showbreak=>_
+" }}}
+
+" tabs
+" {{{
+set listchars=tab:>.
+set tabstop=8
+set shiftwidth=4
+set softtabstop=4
+set shiftround
+" }}}
+
+" folding
+" {{{
+set foldcolumn=5
+set foldlevelstart=0
+" }}}
+
+" colorscheme /  syntax highlight
+" {{{
+"colorscheme olgas
+colorscheme desert
+syntax enable
+syntax sync fromstart
+" }}}
+
+" minimize gui
+" {{{
+" set guioptions=
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+set guifont=Monospace\ 9
+" }}}
+
+" searching
+" {{{
+set hlsearch
+set incsearch
+" }}}
+
+" bracket matching and matchtime in ms.
+" {{{
+set showmatch
+set matchtime=5
+" }}}
+
+" }}}
+
+" Mappings / Custom Global Keybindings
+" {{{
+
+" first of all: temporary mappings, to get rid of some bad habits.
+"inoremap <esc> <nop>
+"inoremap <Up> <nop>
+"inoremap <Down> <nop>
+"inoremap <Left> <nop>
+"inoremap <Right> <nop>
+
+" alternative to esc in insert mode!
+inoremap jk <esc>
+
+" display help in new tab on <F1>
+map <F1> :tab help<CR>
+
+map <F5> :silent make \| copen \| redraw!<CR>
+map <F5> :silent make \|  redraw!<CR>
+
+" retab
+map <leader>rt :retab!<CR>
+
+" toggle tabs visibility
+noremap <Leader>t :set invlist<CR>
+
+" nnoremap <C-]> <C-]>:tselect<CR>
+
+" easy editing and sourcing of vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
+
+" turn off search highlight
+nnoremap <leader>h :nohlsearch<cr>
+
+" toggle visibility of trailing whitespaces
+nnoremap <leader>w :match Error /\v +$/<cr>
+nnoremap <leader>W :match<cr>
+
+" toggle and navigate quickfix window
+nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cp :cprevious<cr>
+nnoremap <leader>cc :cc<cr>
+
+" grep operator
+" nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
+nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
+vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+" buffer navigaion
+nnoremap <leader>bn :MBEbn<cr>
+nnoremap <leader>bp :MBEbp<cr>
+nnoremap <leader>bd :MBEbd<cr>
+
+" activate 'very magic' for searches automatically
+nnoremap / /\v
+nnoremap ? ?\v
+
+" make
+nnoremap <leader>mm :silent make!<cr>
+nnoremap <leader>mc :silent make! clean<cr>
+nnoremap <leader>mn :silent make! new<cr>
+nnoremap <leader>mr :silent make!<cr>:call system("make run &")<cr>
+nnoremap <leader>md :silent make!<cr>:call system("make debug &")<cr>
+nnoremap <leader>ms :silent make! stop<cr>
+
+nnoremap <leader>mf :silent make! %:r<cr>:redraw! <cr>
+nnoremap <leader>mx :silent make! %:r <bar> !./%:r<cr>
+
+" run my new 'ColorTune' plugin
+" nnoremap <leader>cc :call Colortune_fill()<cr>
+
+" session handling
+nnoremap <leader>ss :call Session_save()<cr>
+nnoremap <leader>sl :call Session_load()<cr>
+
+" }}}
+
+" layout
+nnoremap <leader>ln :NERDTreeToggle<cr>
+nnoremap <leader>lt :TagbarToggle<cr>
+nnoremap <leader>lg :ConqueGdb<cr>
+nnoremap <leader>lm :MBEToggle<cr>
+nnoremap <leader>lq :copen<cr>
+
+" File Type Specific Settings
+" {{{
+
+" Enforce custom syntax hl for some file extensions
+" {{{
+augroup filetype_custom
+    autocmd!
+    au BufRead,BufNewFile *.twig set filetype=htmljinja
+    au BufRead,BufNewFile *.md set filetype=markdown
+augroup END
+
+
+
+" }}}
+
+" Set foldmethod=marker for vim files
+" {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" Custom settings for markdown files
+" {{{
+augroup filetype_markdown
+    autocmd!
+"    autocmd FileType markdown setlocal spell
+    " autocmd FileType markdown setlocal list
+augroup END
+" }}}
+
+" Simple shortcuts for cpp files
+" {{{
+augroup filetype_cpp
+     autocmd!
+     autocmd FileType cpp nnoremap <buffer> <localleader>c I//<esc>
+     autocmd FileType cpp :iabbrev <buffer> iff if () <cr>{<cr>}jkF
+     autocmd FileType cpp nnoremap <buffer> <leader>bo :r ~/_int/dev/misc/c++/template/template.cpp<cr>
+augroup END
+
+" }}}
+
+" Haskell specifics
+" {{{
+augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell setlocal foldmethod=marker
+"    autocmd Filetype haskell map <F5> :w<ENTER>:term cabal -- exec runghc %<ENTER>
+    autocmd Filetype haskell map <F5> :w<ENTER>:term make<ENTER>
+    autocmd FileType haskell setlocal expandtab
+augroup END
+" }}}
+
+" }}}
+
+" Session Handling (that sucks)
+" {{{
+" we always want MBE, NERDTree and Tagbar
+"
+let g:miniBufExplBRSplit = 0   " Put new window above
+
+function! Session_save()
+
+        NERDTreeClose
+        TagbarClose
+        MBECloseAll
+        mksession! .lastvimsession
+        NERDTree
+        Tagbar
+        MBEOpen
+
+endfunction
+
+function! Session_load()
+
+        NERDTreeClose
+        TagbarClose
+        MBECloseAll
+"       source ~/.lastvimsession
+        NERDTree
+        Tagbar
+        MBEOpen
+        call feedkeys("\<c-w>\<c-w>")
+
+
+endfunction
+
+if filereadable(".lastvimsession")
+"
+"    augroup my_vim_leave
+"       autocmd!
+"       autocmd VimLeave * NERDTreeClose
+"       autocmd VimLeave * TagbarClose
+"       autocmd VimLeave * MBECloseAll
+"       autocmd VimLeave * mksession! .lastvimsession
+"    augroup END
+"
+"    augroup my_vim_enter
+"       autocmd!
+"       autocmd VimEnter * source .lastvimsession
+"       autocmd VimEnter * NERDTree
+"       autocmd VimEnter * MBEOpen
+"       autocmd VimEnter * Tagbar
+"    augroup END
+"
+endif
+
+" }}}
+
+" Custom Functions
+" {{{
+
+
+" GrepOperator(type)
+" {{{
+function! s:GrepOperator(type)
+
+    let saved_unnamed_register = @@
+
+    if a:type ==# 'v'
+        normal! `<v`>y
+
+    elseif a:type ==# 'char'
+        normal! `[v`]y
+
+    else
+        echom "not supported"
+        return
+
+    endif
+
+    silent execute "grep! -R " . shellescape(@@) . " ."
+    copen
+
+    let @@ = saved_unnamed_register
+
+endfunction
+" }}}
+
+" }}}
+
+" Experimental (Disabled)
+" {{{
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" experimental stuff added during the course of:    "
+" learnvimscriptthehardway.stevelosh.com            "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" move line under the cursor up and down.
+" nnoremap <leader>- ddp
+" nnoremap <leader>_ kddpk
+
+" make word under curstor upper-case
+" inoremap <leader><c-u> <esc>viwUea
+" nnoremap <leader><c-u> viwUe
+
+" abbreviations and typo correction
+" iabbrev @@  miguel@quad
+" iabbrev ccopy Copyright 2014 M. Idziorek, all rights reserved.
+" iabbrev teh the
+
+" topic handling for markdown files
+" onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+" onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
+"
+" single and double quoting
+" nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+" nnoremap <leader>' viw<esc>a"<esc>hbi"<esc>lel
+" vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>l
+
+" open previous buffer in new split-window
+" nnoremap <leader>p :execute "leftabove vsplit ".bufname("#")<cr>
+
+
+" }}}
+
+" Vim Status Line Color
+" {{{
+
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0
+  elseif a:mode == 'r'
+    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
+  else
+    hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
+  endif
+endfunction
+
+" }}}
+"
+
+if has("nvim")
+  " Make escape work in the Neovim terminal.
+  tnoremap <Esc> <C-\><C-n>
+
+  " Make navigation into and out of Neovim terminal splits nicer.
+  tnoremap <C-h> <C-\><C-N><C-w>h
+  tnoremap <C-j> <C-\><C-N><C-w>j
+  tnoremap <C-k> <C-\><C-N><C-w>k
+  tnoremap <C-l> <C-\><C-N><C-w>l
+
+  " I like relative numbering when in normal mode.
+  autocmd TermOpen * setlocal conceallevel=0 colorcolumn=0 relativenumber
+
+  " Prefer Neovim terminal insert mode to normal mode.
+  autocmd BufEnter term://* startinsert
+endif
