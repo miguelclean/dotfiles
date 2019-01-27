@@ -1,14 +1,20 @@
 """""""""""""""""""""""""""""""""""""
 "      Miguel's .vimrc              "
 "      Author: Michal Idziorek      "
-"      Last Update: 2018-OCT-17     "
+"      Last Update: 2019-01-27      "
 """""""""""""""""""""""""""""""""""""
 
 " {{{ TODO / NOTES
 "
 "  NEW: https://github.com/vim-airline/vim-airline
 "
-" http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
+"    Emmet.io?
+"    autocomplete !
+"    jump to def / uses !
+"    spellcheck / translate / thesaurus
+
+
+" some stuff from: http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
 " set exrc 
 " set secure
 "
@@ -221,10 +227,10 @@ set statusline+=%=        " Switch to the right side
 set statusline+=%l        " Current line
 set statusline+=/         " Separator
 set statusline+=%L        " Total lines
-set statusline+=,          " comma
+set statusline+=,         " comma
 set statusline+=%c        " Column
-set statusline+=\ (%P)        " Percentage
-set statusline&          " reset?
+set statusline+=\ (%P)    " Percentage
+set statusline&           " reset?
 " }}}
 
 " terminal width / colorcolumn
