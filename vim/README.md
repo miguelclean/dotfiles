@@ -1,7 +1,8 @@
 My Vimrc Config
 ===============
 
-This directory hosts my personal vim config files.
+This repo hosts my personal vim config files.
+They are very unlikely to be useful to anybody (excepting me) at this point.
 
 Dependancies
 ============
@@ -12,7 +13,6 @@ I found the foloowing on vim.org.
 
 * syntax/htmljinja.vim
 * syntax/jinja.vim
-
 
 Installation
 ============
@@ -37,7 +37,7 @@ Steve Losh's book: Learn Vimscript The Hard Way: http://learnvimscriptthehardway
 License
 =======
 
-Copyright (c) 2014-2018 Michal Idziorek (unless stated otherwise)
+Copyright (c) 2014-2019 Michal Idziorek (unless stated otherwise)
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

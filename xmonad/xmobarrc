@@ -1,50 +1,45 @@
 -- vim: set ft=haskell:
-
 Config { 
 
--- font = "-adobe-courier-medium-r-*-*-34-*-*-*-*-*-*-*",
---        font= "-adobe-*-*-r-*-24-*",
---        font= "-*-*-*-*-*-24-*",
-
-      font          = "xft:Sans-13:bold"
-
-    , bgColor       = "black"
-    , fgColor       = "grey"
-    , position      = TopW L 95
-    , lowerOnStart  = True
-    , commands      = [
+      font            = "xft:Sans-10:bold"
+    , additionalFonts = ["xft:FontAwesome-10"]
+    , bgColor         = "#002b36" 
+    , fgColor         = "#657b83"
+    , position        = TopW L 95
+    , lowerOnStart    = True
+    , pickBroadest    = False
+    , commands        = [
 
               Run StdinReader
 
             , Run MultiCpu ["-t","<total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7>%",
-                            "-L","10","-H","65","--low","gray90","--normal","lightblue","--high","red"] 10
+                            "-L","10","-H","65","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
-            , Run Network "eth0" ["-t","<rx> <tx>","-L","100","-H","5000","--low","gray90","--normal","lightblue","--high","red"]  10
-            , Run Memory ["-t","<usedratio>%","-L","20","-H","60","--low","gray90","--normal","lightblue","--high","red"] 10
-            , Run Swap ["-t","<usedratio>%","-L","1","-H","10","--low","gray90","--normal","yellow","--high","red"] 10
+            , Run Network "eth0" ["-t","rx <rx> tx <tx>",
+                                  "-L","100","-H","5000","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
-            --, Run Date "%a %_d %b %Y %H:%M:%S" "date" 10
-            , Run Date "%d %b %H:%M:%S" "date" 10
+            , Run Memory ["-t","<usedratio>%",
+                          "-L","20","-H","60","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
-            , Run DiskU 
-                [
+            , Run Swap ["-t","<usedratio>%",
+                        "-L","1","-H","10","--low","#93a1a1","--normal","#b58900","--high","#dc322f"] 10
 
-                    ("/",           "/:<fc=white><free></fc>"),
-                    ("/mnt/DATA",   "/dat:<fc=white><free></fc>"),
-                    ("/mnt/BACKUP", "/bkp:<fc=white><free></fc>"),
-                    ("/mnt/PENIS",  "/pns:<fc=white><free></fc>")
+            , Run Date "%a %d %b %Y %H:%M:%S" "date" 10
 
-                ] [] 20     
+            , Run DiskU [ ("/",           "/:<fc=#93a1a1><free></fc>"),
+                          ("/mnt/DATA",   "/dat:<fc=#93a1a1><free></fc>"),
+                          ("/mnt/BACKUP", "/bkp:<fc=#93a1a1><free></fc>"),
+                          ("/mnt/PENIS",  "/pns:<fc=#93a1a1><free></fc>")] [] 20     
 
-            , Run CoreTemp ["-t", "<core0> <core1> <core2> <core3>", "-L", "40", "-H", "60", "-l", "gray90", "-n", "lightblue", "-h", "red"] 50
+            , Run CoreTemp ["-t", "<core0> <core1> <core2> <core3>",
+                            "-L", "30", "-H", "60", "-l", "#93a1a1", "-n", "#268bd2", "-h", "#dc322f"] 50
 
-            , Run Com "/home/miguel/git/dotfiles/xmonad/checkmail.sh" [] "mymails" 100
+            , Run Com "/home/miguel/git/dotfiles/xmonad/checkmail.sh" [] "mymails" 30
             , Run Com "/home/miguel/git/dotfiles/xmonad/nvidia-temp.sh" [] "gputemp" 30
 
             ]
 
     , sepChar   = "%"
     , alignSep  = "}{"
-    , template  = "%StdinReader%}{%mymails% - net %eth0% KB/s- cpu %multicpu% (%coretemp%°C) - gpu %gputemp% - mem %memory% (%swap%) - %disku% - <fc=#aaaacc>%date%</fc>"
-
+    , template  = "%StdinReader%}{%mymails% - %eth0% KB/s - cpu %multicpu% (%coretemp%°C) - gpu %gputemp% - mem %memory% (%swap%) - %disku% - <fc=#93a1a1>%date%</fc> <action=`zenity --question --text=yesorno && xmessage -geometry 200x200+300+300 dupa -buttons YES:0,nope&&xterm`><fn=1></fn></action>"
 }
