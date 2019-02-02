@@ -1,6 +1,6 @@
 --
 -- Miguel's Xmonad Config. 
--- Last Update: 2018-06-07
+-- Last Update: 2019-01-27
 -- 
 
 import XMonad
@@ -15,7 +15,7 @@ import XMonad.Util.EZConfig
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.UrgencyHook as UH
 import XMonad.Util.NamedWindows
 import XMonad.Util.WorkspaceCompare
 import System.IO
@@ -76,8 +76,9 @@ data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 instance UrgencyHook LibNotifyUrgencyHook where
         urgencyHook LibNotifyUrgencyHook w = do
                 name     <- getName w
-                Just idx <- fmap (W.findTag w) $ gets windowset
-                safeSpawn "notify-send" [show name, "workspace " ++ idx]
+--                Just idx <- fmap (W.findTag w) $ gets windowset
+--                safeSpawn "notify-send" [show name, "workspace " ++ idx]
+                spawn "xterm"
 
 
 layout = tiled ||| Mirror tiled ||| noBorders Full ||| Grid  ||| ThreeColMid 1 (3/100) (1/2)
@@ -115,8 +116,8 @@ myExtraWorkspaces =
  
 main = do
   xmproc <- spawnPipe $ "/usr/bin/xmobar "++configPath++"/xmobarrc"
-  xmonad 
---    $ withUrgencyHook LibNotifyUrgencyHook
+  --xmonad $ withUrgencyHookC LibNotifyUrgencyHook {} urgencyConfig {suppressWhen=UH.Never,remindWhen=UH.Repeatedly 10 5}
+  xmonad $ withUrgencyHookC BorderUrgencyHook { urgencyBorderColor = "#ff0000" }   urgencyConfig {suppressWhen=UH.Never,remindWhen=UH.Dont} -- remind does not work anyway :(
 --    $ docks 
     $ ewmh defaultConfig {
 
