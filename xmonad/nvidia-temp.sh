@@ -32,5 +32,5 @@ get_color()
 TEMP_COL=$(get_color $TEMP $TEMP_LOW $TEMP_HIGH)
 GPU_COL=$(get_color $GPU $GPU_LOW $GPU_HIGH)
 
-echo "<fc=$GPU_COL>$GPU</fc>% (<fc=$TEMP_COL>$TEMP</fc>°C)"
+echo "<fc=$GPU_COL>$GPU</fc>% <fc=$TEMP_COL>$TEMP</fc>°C"
 

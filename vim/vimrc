@@ -5,14 +5,27 @@
 """""""""""""""""""""""""""""""""""""
 
 " {{{ NOTES
-
+" https://wiki.haskell.org/99_questions/Solutions/34
+" http://www.stephendiehl.com/posts/vim_2016.html
+" https://github.com/lukerandall/haskellmode-vim
+" :h compiler-plugin
+" :help equalprg
+" 15:15:33     gagbo | and then you can map it on key like nnoremap    │ aauren
+"                   | <F7> :compiler clang-tidy<CR>:make and nnoremap │ abbec
+"                   | <F8> :compiler clang<CR>:make in like           │ Accord
+"                   | ~/.vim/after/ftplugin/cpp.vim for example
+" https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/
+" https://mendo.zone/fun/neovim-setup-haskell/
+" https://github.com/aloiscochard/codex
+" https://github.com/haskell/haskell-ide-engine#using-hie-with-vim-or-neovim ?
+" ghc-mod, hlint (haskell)
+" https://wiki.haskell.org/Vim
 " http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
 " https://github.com/vim-airline/vim-airline
 " https://github.com/spf13/spf13-vim
 " http://antjanus.com/blog/thoughts-and-opinions/use-vim/
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 " http://derekingrouville.com/2012/vim-is-my-ide/
-" http://www.stephendiehl.com/posts/vim_2016.html
 " https://github.com/VundleVim/Vundle.vim
 " draculatheme.com
 " learnvimscriptthehardway.stevelosh.com            "
@@ -22,7 +35,7 @@
 " change mappings to more specific mappings and use noremap!
 " toggle 'cursorline' via hotkey for nicer reading experience.
 " ft=c.doxygen etc.
-" include dependancies as git submodules (wherever possible?? seriously?) (check licenses first)
+" include dependancies as git submodules (wherever possible?? seriously?) (licenses?)
 " :help complete-functions
 " quickfix
 " compiler/debugger invocation
@@ -86,6 +99,7 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
+Plugin 'Shougo/vimproc.vim'
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'dracula/vim'
 " Plugin 'git://ex40.softwarefools.com/vim-potion.git'

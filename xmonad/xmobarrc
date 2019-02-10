@@ -2,7 +2,7 @@
 Config { 
 
       font            = "xft:Sans-10:bold"
-    , additionalFonts = ["xft:FontAwesome-10"]
+    , additionalFonts = ["xft:FontAwesome-11"]
     , bgColor         = "#002b36" 
     , fgColor         = "#657b83"
     , position        = TopW L 95
@@ -15,7 +15,7 @@ Config {
             , Run MultiCpu ["-t","<total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7>%",
                             "-L","10","-H","65","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
-            , Run Network "eth0" ["-t","rx <rx> tx <tx>",
+            , Run Network "eno1" ["-t","rx <rx> tx <tx>",
                                   "-L","100","-H","5000","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
             , Run Memory ["-t","<usedratio>%",
@@ -26,10 +26,10 @@ Config {
 
             , Run Date "%a %d %b %Y %H:%M:%S" "date" 10
 
-            , Run DiskU [ ("/",           "/:<fc=#93a1a1><free></fc>"),
-                          ("/mnt/DATA",   "/dat:<fc=#93a1a1><free></fc>"),
-                          ("/mnt/BACKUP", "/bkp:<fc=#93a1a1><free></fc>"),
-                          ("/mnt/PENIS",  "/pns:<fc=#93a1a1><free></fc>")] [] 20     
+            , Run DiskU [ ("/",           "root:<fc=#93a1a1><free></fc>"),
+                          ("/mnt/sdd1",   "data:<fc=#93a1a1><free></fc>"),
+                          ("/mnt/sdc2",   "bckp:<fc=#93a1a1><free></fc>"),
+                          ("/mnt/win",    "fat:<fc=#93a1a1><free></fc>")] [] 20     
 
             , Run CoreTemp ["-t", "<core0> <core1> <core2> <core3>",
                             "-L", "30", "-H", "60", "-l", "#93a1a1", "-n", "#268bd2", "-h", "#dc322f"] 50
@@ -41,5 +41,5 @@ Config {
 
     , sepChar   = "%"
     , alignSep  = "}{"
-    , template  = "%StdinReader%}{%mymails% - %eth0% KB/s - cpu %multicpu% (%coretemp%°C) - gpu %gputemp% - mem %memory% (%swap%) - %disku% - <fc=#93a1a1>%date%</fc> <action=`zenity --question --text=yesorno && xmessage -geometry 200x200+300+300 dupa -buttons YES:0,nope&&xterm`><fn=1></fn></action>"
+    , template  = "%StdinReader%}{%mymails% - %eno1% KB/s <action=xterm -e htop><fn=1></fn> %multicpu% %coretemp%°C</action> <action=nvidia-settings><fn=1></fn> %gputemp%</action> <fn=1></fn> %memory% (%swap%) %disku% - <fc=#93a1a1>%date%</fc> <action=`pavucontrol`><fn=1></fn> </action><action=`systemctl suspend`><fn=1></fn></action>"
 }
