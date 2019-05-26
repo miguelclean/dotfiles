@@ -16,13 +16,13 @@ get_color()
     HIGH=$3
     if test $TEMP -lt $LOW
     then
-	COL=gray90
+	COL=#93a1a1
     else
 	if test $TEMP -lt $HIGH
 	then
-	    COL=lightblue
+	    COL=#268bd2
 	else
-	    COL=red
+	    COL=#dc322f
 	fi
     fi
 

@@ -1,6 +1,7 @@
 --
 -- Miguel's Xmonad Config. 
--- Last Update: 2019-02-10
+-- Last Update: 2019-05-18
+-- Runs on xmonad 0.15
 -- 
 
 import XMonad
@@ -76,10 +77,11 @@ main = do
   xmproc <- spawnPipe $ "/usr/bin/xmobar "++configPath++"/xmobarrc"
   --xmonad $ withUrgencyHookC LibNotifyUrgencyHook {} urgencyConfig {suppressWhen=UH.Never,remindWhen=UH.Repeatedly 10 5}
   xmonad $ withUrgencyHookC BorderUrgencyHook { urgencyBorderColor = "#ff0000" }   urgencyConfig {suppressWhen=UH.Never,remindWhen=UH.Dont} -- remind does not work anyway :(
---    $ docks 
+    $ docks 
     $ ewmh defaultConfig {
      workspaces = (map snd myWorkspaces)
     ,borderWidth             = 2
+
     ,normalBorderColor       = "#586e75"
     ,focusedBorderColor      = "#eee8d5"
 --  ,focusFollowsMouse  = False
@@ -105,8 +107,8 @@ main = do
             takeTopFocus >>( dynamicLogWithPP $ xmobarPP
                         { 
 --                        ppOrder = reverse,
---                        ppSort = mkWsSort $ getXineramaPhysicalWsCompare horizontalScreenOrderer, --getSortByXineramaPhysicalRule def,
-                          ppSort =  getSortByXineramaPhysicalRule, 
+                          ppSort = mkWsSort $ getXineramaPhysicalWsCompare horizontalScreenOrderer, --getSortByXineramaPhysicalRule def,
+--                        ppSort =  getSortByXineramaPhysicalRule, 
 --                        ppSort =  mkWsSort $ getXineramaPhysicalWsCompare, 
 --                        ppSort =  mkWsSort $ getXineramaWsCompare, 
                           ppOutput = hPutStrLn xmproc,
@@ -114,8 +116,8 @@ main = do
                           ppCurrent = (\x -> "<fc=#dc322f>"++x++"</fc>"),               --red
                           ppVisible = (\x -> "<fc=#859900>"++x++"</fc>"),             --green
                           ppHidden = (\x -> "<fc=#b58900>"++x++"</fc>"),             --yellow
-                          ppHiddenNoWindows = (\x -> "<fc=#93a1a1>"++x++"</fc>")       --gray
---                        ppVisibleNoWindows = Just (\x-> "<fc=#268bd2>"++x++"</fc>")  --blue
+                          ppHiddenNoWindows = (\x -> "<fc=#93a1a1>"++x++"</fc>"),    --gray
+                          ppVisibleNoWindows = Just (\x-> "<fc=#268bd2>"++x++"</fc>")  --blue
                         })
 } `additionalKeys`
                 (
@@ -123,10 +125,11 @@ main = do
                          ((mod4Mask,               xK_F1     ), spawn "xterm -e vim ~/.xmonad/xmonad.hs")
                         ,((mod4Mask              , xK_b      ), sendMessage ToggleStruts)
                         ,((mod4Mask,               xK_p     ), spawn "dmenu_run -nb '#073642' -nf '#fdf6e3' -sb '#268bd2' -sf '#073642'  -fn 'DejaVu Sans-10'")
-                        ,((mod4Mask,               xK_x     ), spawn "slock")
+                        ,((mod4Mask,               xK_l     ), spawn "slock")
                         ,((mod4Mask,               xK_m     ), spawn "xterm -e \"fetchmail&&sleep 2\"")
                         ,((mod4Mask,               xK_c     ), spawn "xterm -e \"echo clipboard&&xclip -o -selection clipboard&&echo&&echo&&echo primary&&xclip -o -selection p&&echo&&echo&&echo [press enter]&&read\"")
                         ,((mod4Mask,               xK_s     ), spawn "import /tmp/screen.png && feh -. /tmp/screen.png")
+                        ,((mod4Mask,               xK_semicolon     ), sendMessage Expand)
 
 --                      , ((mod4Mask,               xK_m     ), spawn "notify-send \"$( fetchmail )\"")
                         --,((mod4Mask .|. shiftMask, xK_x     ), spawn "ans=$(zenity  --list  --text 'wanna restart?' --radiolist  --column 'Pick' --column 'Opinion' TRUE '' FALSE 'sudo shutdown -r now' FALSE 'sudo shutdown -h now' ); $ans")
@@ -149,7 +152,7 @@ main = do
                  ++
                  [
                     ((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.
-                    | (key, sc) <- zip [xK_q,xK_w, xK_e, xK_r] [3,2,0,1] -- change to match your screen order
+                    | (key, sc) <- zip [xK_q,xK_w, xK_e, xK_r] [2,3,0,1] -- change to match your screen order
                     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
                  ] 
                  ++

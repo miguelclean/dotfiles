@@ -12,7 +12,8 @@ case $MAILS in
  ;;
  *)
 	#echo "$A<fc="#93a1a1"><fn=1></fn>$MAILS</fc>$B"
-	echo "$A<fc="#93a1a1"><fn=1></fn></fc>$B"
+	#echo "$A<fc="#93a1a1"><fn=1></fn></fc>$B"
+	echo "$A<fn=1></fn>$B"
  ;;
 esac
 

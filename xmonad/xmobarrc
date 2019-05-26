@@ -15,8 +15,8 @@ Config {
             , Run MultiCpu ["-t","<total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7>%",
                             "-L","10","-H","65","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
-            , Run Network "eno1" ["-t","rx <rx> tx <tx>",
-                                  "-L","100","-H","5000","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
+            , Run Network "eno1" ["-t","r <rx> t <tx>",
+                                  "-S","True","-L","1000000","-H","10000000","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
 
             , Run Memory ["-t","<usedratio>%",
                           "-L","20","-H","60","--low","#93a1a1","--normal","#268bd2","--high","#dc322f"] 10
@@ -24,7 +24,7 @@ Config {
             , Run Swap ["-t","<usedratio>%",
                         "-L","1","-H","10","--low","#93a1a1","--normal","#b58900","--high","#dc322f"] 10
 
-            , Run Date "%a %d %b %Y %H:%M:%S" "date" 10
+            , Run Date "<fn=1></fn> <fc=#93a1a1>%a %d %b %Y</fc> <action=hamster-time-tracker><fn=1></fn> <fc=#93a1a1>%H:%M:%S</fc></action>" "date" 10
 
             , Run DiskU [ ("/",           "root:<fc=#93a1a1><free></fc>"),
                           ("/mnt/sdd1",   "data:<fc=#93a1a1><free></fc>"),
@@ -32,7 +32,7 @@ Config {
                           ("/mnt/win",    "fat:<fc=#93a1a1><free></fc>")] [] 20     
 
             , Run CoreTemp ["-t", "<core0> <core1> <core2> <core3>",
-                            "-L", "30", "-H", "60", "-l", "#93a1a1", "-n", "#268bd2", "-h", "#dc322f"] 50
+                            "-L", "40", "-H", "60", "-l", "#93a1a1", "-n", "#268bd2", "-h", "#dc322f"] 50
 
             , Run Com "/home/miguel/git/dotfiles/xmonad/checkmail.sh" [] "mymails" 30
             , Run Com "/home/miguel/git/dotfiles/xmonad/nvidia-temp.sh" [] "gputemp" 30
@@ -41,5 +41,5 @@ Config {
 
     , sepChar   = "%"
     , alignSep  = "}{"
-    , template  = "%StdinReader%}{%mymails% - %eno1% KB/s <action=xterm -e htop><fn=1></fn> %multicpu% %coretemp%°C</action> <action=nvidia-settings><fn=1></fn> %gputemp%</action> <fn=1></fn> %memory% (%swap%) %disku% - <fc=#93a1a1>%date%</fc> <action=`pavucontrol`><fn=1></fn> </action><action=`systemctl suspend`><fn=1></fn></action>"
+    , template  = "%StdinReader%}{%mymails% <action=xterm -e sudo iftop><fn=1></fn> %eno1% </action><action=xterm -e htop><fn=1></fn> %multicpu% <fn=1></fn> %coretemp%°C</action> <action=nvidia-settings><fn=1></fn> %gputemp%</action> <fn=1></fn> %memory% (%swap%) <fn=1></fn> %disku% %date% <action=`pavucontrol`><fn=1></fn> </action><action=`systemctl suspend`><fn=1></fn></action>"
 }

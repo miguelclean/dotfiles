@@ -9,7 +9,7 @@ Dependancies
 
 Requires Vundle.vim which is available from github.
 
-I found the foloowing on vim.org.
+I found the following on vim.org.
 
 * syntax/htmljinja.vim
 * syntax/jinja.vim

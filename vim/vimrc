@@ -1,10 +1,12 @@
 """""""""""""""""""""""""""""""""""""
 "      Miguel's .vimrc              "
 "      Author: m.i@gmx.at           "
-"      Last Update: 2019-02-02      "
+"      Last Update: 2019-05-25      "
 """""""""""""""""""""""""""""""""""""
 
 " {{{ NOTES
+" THIS LOOSE NOTES REQUIRE REVIEW!
+" external links to browser
 " https://wiki.haskell.org/99_questions/Solutions/34
 " http://www.stephendiehl.com/posts/vim_2016.html
 " https://github.com/lukerandall/haskellmode-vim
@@ -46,7 +48,6 @@
 " Do something about the input problems in ConqueGDB/Term (YouCompl?)
 " implement a plugin for fast-reading (check if one exists first ;))
 " plugins on vim.org etc.
-"
 " syntastic! https://github.com/vim-syntastic/syntastic
 " vimproc! https://github.com/Shougo/vimproc.vim
 " pathogen / vundle           DONE
@@ -74,24 +75,15 @@
 " CScope / CCTree
 " inline reference/ (stlrefvim?)
 " emmet.io (webdev)
-
 " }}}
 
 " {{{ VUNDLE
-
+" as required by https://github.com/VundleVim/Vundle.vim
 set nocompatible              
 filetype off                  
-
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-
-" can call vundle#begin('~/some/path/here')
 call vundle#begin()
-
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
-" plugins
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
@@ -99,18 +91,17 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
-Plugin 'Shougo/vimproc.vim'
+" Plugin 'Shougo/vimproc.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 " Plugin 'vim-scripts/Conque-GDB'
 " Plugin 'dracula/vim'
 " Plugin 'git://ex40.softwarefools.com/vim-potion.git'
 " Plugin 'git://ex40.softwarefools.com/vim-colortune.git'
-
-" All of your Plugins must be added before the following line
 call vundle#end()            
 filetype plugin indent on
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-
 " }}}
 
 "{{{ DISABLED 
@@ -124,8 +115,8 @@ filetype plugin indent on
 
 " let g:potion_command = "/home/miguel/int/dev/potion/bin/potion"
 
-"set wrap
-"set showbreak=>_
+" set wrap
+" set showbreak=>_
 
 " move line under the cursor up and down.
 " nnoremap <leader>- ddp
@@ -138,6 +129,10 @@ filetype plugin indent on
 
 " {{{ BASICS
 
+" {{{ spelling OFF
+" set spell
+" }}}
+
 " {{{ mapleaders
 " use <space> but remap to _ so it is visible for 'showcmd'
 nmap <space> _
@@ -147,29 +142,28 @@ let maplocalleader="\_"
 
 " {{{ misc
 
+set nocompatible
 set foldmethod=marker
 set nowrap
-
-set nocompatible
 set backspace=2
 " set ruler
 set showcmd
 set number
 set hidden
 
-" set cursorcolumn
-" set cursorline
+"set cursorcolumn
+set cursorline
 
 " save before making etc.
 set autowrite
 
 " some nice candy
-set laststatus=2
+set laststatus=2 "always show status line on last window
 set wildmenu
 
 " indent
-set autoindent
-set cindent
+" set autoindent
+" set cindent
 
 " mouse support in xterm
 set mouse=a
@@ -181,6 +175,7 @@ set previewheight=25
 " set splitbelow
 " set splitright
 
+" easy move between windows
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -191,13 +186,9 @@ nnoremap <C-H> <C-W><C-H>
 " {{{ statusline
 set statusline=%f         " Path to the file
 set statusline+=%=        " Switch to the right side
-set statusline+=%l        " Current line
-set statusline+=/         " Separator
-set statusline+=%L        " Total lines
-set statusline+=,         " comma
-set statusline+=%c        " Column
-set statusline+=\ (%P)    " Percentage
-set statusline&           " reset?
+set statusline+=%l,%c     " Current line,column
+set statusline+=\ (%L,%P)    " Percentage
+"set statusline&           " reset
 " }}}
 
 " {{{ terminal width / colocolumn
@@ -233,9 +224,13 @@ else
     set background=dark
 endif
 
-    set background=dark
+set background=dark
 
 colorscheme solarized
+
+hi SpellBad ctermfg=white
+hi SpellBad ctermbg=red
+
 syntax sync fromstart
 " }}}
 
@@ -283,20 +278,20 @@ nnoremap ? ?\v
 inoremap jk <esc>
 
 " retab
-map <leader>rt :retab!<CR>
+" map <leader>rt :retab!<CR>
 
 " toggle tabs visibility
 noremap <leader>t :set invlist<CR>
 
 " easy editing and sourcing of vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " turn off search highlight
 nnoremap <leader>h :nohlsearch<cr>
 
 " toggle visibility of trailing whitespaces
-nnoremap <leader>w :match Error /\v +$/<cr>
+nnoremap <leader>w :match ErrorMsg /\v +$/<cr>
 nnoremap <leader>W :match<cr>
 
 " toggle and navigate quickfix window
@@ -310,23 +305,23 @@ nnoremap <leader>bp :MBEbp<cr>
 nnoremap <leader>bd :MBEbd<cr>
 
 " make
-nnoremap <leader>mm :silent make!<cr>
-nnoremap <leader>mc :silent make! clean<cr>
-nnoremap <leader>mn :silent make! new<cr>
-nnoremap <leader>mr :silent make!<cr>:call system("make run &")<cr>
-nnoremap <leader>md :silent make!<cr>:call system("make debug &")<cr>
-nnoremap <leader>ms :silent make! stop<cr>
-nnoremap <leader>mf :silent make! %:r<cr>:redraw! <cr>
-nnoremap <leader>mx :silent make! %:r <bar> !./%:r<cr>
+" nnoremap <leader>mm :silent make!<cr>
+" nnoremap <leader>mc :silent make! clean<cr>
+" nnoremap <leader>mn :silent make! new<cr>
+" nnoremap <leader>mr :silent make!<cr>:call system("make run &")<cr>
+" nnoremap <leader>md :silent make!<cr>:call system("make debug &")<cr>
+" nnoremap <leader>ms :silent make! stop<cr>
+" nnoremap <leader>mf :silent make! %:r<cr>:redraw! <cr>
+" nnoremap <leader>mx :silent make! %:r <bar> !./%:r<cr>
 
 " session handling
-nnoremap <leader>ss :call Session_save()<cr>
-nnoremap <leader>sl :call Session_load()<cr>
+" nnoremap <leader>ss :call Session_save()<cr>
+" nnoremap <leader>sl :call Session_load()<cr>
 
 " layout
 nnoremap <leader>ln :NERDTreeToggle<cr>
 nnoremap <leader>lt :TagbarToggle<cr>
-nnoremap <leader>lg :ConqueGdb<cr>
+"nnoremap <leader>lg :ConqueGdb<cr>
 nnoremap <leader>lm :MBEToggle<cr>
 nnoremap <leader>lq :copen<cr>
 
@@ -344,6 +339,7 @@ augroup END
 " {{{ markdown
 augroup filetype_markdown
     autocmd!
+    autocmd FileType markdown setlocal spell
 "    autocmd FileType markdown setlocal spell
     " autocmd FileType markdown setlocal list
 augroup END
