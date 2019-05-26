@@ -1,0 +1,5 @@
+-- :set prompt "\ESC[34mλ> \ESC[m"
+-- :set prompt "%s λ>"
+:set prompt "\ESC[0;36m\STX%s\n\ESC[0;34m\STXλ> \ESC[m\STX"
+:module +Data.List
+:def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""

@@ -1,0 +1,5 @@
+#text/html; w3m -I %{charset} -T text/html; copiousoutput;
+#text/html; surf file:/%s;
+image/*; feh -; 
+text/plain; vim -R -; 
+text/html; firefox %s;copiousoutput 
