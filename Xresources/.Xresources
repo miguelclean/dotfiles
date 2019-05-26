@@ -11,8 +11,10 @@ xterm*visualBell: true
 XTerm*renderFont: true
 !XTerm*renderFont: false
 !XTerm*faceName: DejaVu Sans Mono
-XTerm*faceName: Source Code Variable
-XTerm*faceSize: 12
+!XTerm*faceName: Source Code Variable
+XTerm*faceName: Source Code Pro
+!XTerm*faceName: Inconsolata
+XTerm*faceSize: 14
 
 !
 !start with TrueType fonts disabled
