@@ -1,8 +1,4 @@
-"""""""""""""""""""""""""""""""""""""
-"      Miguel's .vimrc              "
-"      Author: m.i@gmx.at           "
-"      Last Update: 2019-05-25      "
-"""""""""""""""""""""""""""""""""""""
+"Miguel's VIMRC (some stuff added recently depends on NVIM)
 
 " {{{ NOTES
 " THIS LOOSE NOTES REQUIRE REVIEW!
@@ -41,7 +37,7 @@
 " :help complete-functions
 " quickfix
 " compiler/debugger invocation
-" release vim-colortune plugin 
+" release vim-colortune plugin
 " load layout automatically on start (pff)
 " ConqueGDB Resize
 " Do something about startup lag (because of YouCompleteMe)
@@ -57,7 +53,7 @@
 " vim-sensible                DONE
 " taglist.vim
 " snipMate
-" c.vim 
+" c.vim
 " autocomplpop
 " surround
 " perl-support
@@ -78,36 +74,41 @@
 " }}}
 
 " {{{ VUNDLE
-" as required by https://github.com/VundleVim/Vundle.vim
-set nocompatible              
-filetype off                  
+" As required by https://github.com/VundleVim/Vundle.vim
+set nocompatible
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+
 " Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Shougo/vimproc.vim'
+" Plugin 'vim-scripts/Conque-GDB'
+" Plugin 'dracula/vim'
+" Plugin 'git://ex40.softwarefools.com/vim-potion.git'
+" Plugin 'git://ex40.softwarefools.com/vim-colortune.git'
+
+Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
-" Plugin 'Shougo/vimproc.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-" Plugin 'vim-scripts/Conque-GDB'
-" Plugin 'dracula/vim'
-" Plugin 'git://ex40.softwarefools.com/vim-potion.git'
-" Plugin 'git://ex40.softwarefools.com/vim-colortune.git'
-call vundle#end()            
+Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' } " added at work
+Plugin 'neomake/neomake'
+Plugin 'parsonsmatt/intero-neovim'
+
+call vundle#end()
 filetype plugin indent on
 " }}}
 
-"{{{ DISABLED 
-
+"{{{ DISABLED
 " limited .vimrc in current dir
-" set exrc 
+" set exrc
 " set secure
 
 " let g:ConqueGdb_Leader = '\'
@@ -124,14 +125,10 @@ filetype plugin indent on
 
 " abbreviations and typo correction
 " iabbrev teh the
-
+" set spell
 " }}}
 
 " {{{ BASICS
-
-" {{{ spelling OFF
-" set spell
-" }}}
 
 " {{{ mapleaders
 " use <space> but remap to _ so it is visible for 'showcmd'
@@ -141,8 +138,6 @@ let maplocalleader="\_"
 " }}}
 
 " {{{ misc
-
-set nocompatible
 set foldmethod=marker
 set nowrap
 set backspace=2
@@ -169,7 +164,7 @@ set wildmenu
 set mouse=a
 
 "other
-set previewheight=25
+set previewheight=10
 
 " http://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
 " set splitbelow
@@ -180,7 +175,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 " }}}
 
 " {{{ statusline
@@ -191,7 +185,7 @@ set statusline+=\ (%L,%P)    " Percentage
 "set statusline&           " reset
 " }}}
 
-" {{{ terminal width / colocolumn
+" {{{ terminal width / colorcolumn
 " http://richarddingwall.name/2008/05/31/is-the-80-character-line-limit-still-relevant/
 "
 " set tw=80
@@ -252,7 +246,6 @@ set incsearch
 set showmatch
 set matchtime=5
 " }}}
-
 " }}}
 
 " {{{ KEY BINDINGS
@@ -264,11 +257,29 @@ set matchtime=5
 " inoremap <Left> <nop>
 " inoremap <Right> <nop>
 
-"map <F5> :silent make \| copen \| redraw!<CR>
-"map <F5> :silent make \|  redraw!<CR>
-"map <F5> :make<CR>
-"nnoremap <C-]> <C-]>:tselect<CR>
-"nnoremap <leader>cc :call Colortune_fill()<cr>
+" map <F5> :silent make \| copen \| redraw!<CR>
+" map <F5> :silent make \|  redraw!<CR>
+" map <F5> :make<CR>
+" nnoremap <C-]> <C-]>:tselect<CR>
+" nnoremap <leader>cc :call Colortune_fill()<cr>
+
+" make
+" nnoremap <leader>mm :silent make!<cr>
+" nnoremap <leader>mc :silent make! clean<cr>
+" nnoremap <leader>mn :silent make! new<cr>
+" nnoremap <leader>mr :silent make!<cr>:call system("make run &")<cr>
+" nnoremap <leader>md :silent make!<cr>:call system("make debug &")<cr>
+" nnoremap <leader>ms :silent make! stop<cr>
+" nnoremap <leader>mf :silent make! %:r<cr>:redraw! <cr>
+" nnoremap <leader>mx :silent make! %:r <bar> !./%:r<cr>
+"
+" session handling
+" nnoremap <leader>ss :call Session_save()<cr>
+" nnoremap <leader>sl :call Session_load()<cr>
+"
+" retab
+" map <leader>rt :retab!<CR>
+
 
 " activate 'very magic' for searches automatically
 nnoremap / /\v
@@ -276,9 +287,6 @@ nnoremap ? ?\v
 
 " alt esc in insert mode
 inoremap jk <esc>
-
-" retab
-" map <leader>rt :retab!<CR>
 
 " toggle tabs visibility
 noremap <leader>t :set invlist<CR>
@@ -304,32 +312,16 @@ nnoremap <leader>bn :MBEbn<cr>
 nnoremap <leader>bp :MBEbp<cr>
 nnoremap <leader>bd :MBEbd<cr>
 
-" make
-" nnoremap <leader>mm :silent make!<cr>
-" nnoremap <leader>mc :silent make! clean<cr>
-" nnoremap <leader>mn :silent make! new<cr>
-" nnoremap <leader>mr :silent make!<cr>:call system("make run &")<cr>
-" nnoremap <leader>md :silent make!<cr>:call system("make debug &")<cr>
-" nnoremap <leader>ms :silent make! stop<cr>
-" nnoremap <leader>mf :silent make! %:r<cr>:redraw! <cr>
-" nnoremap <leader>mx :silent make! %:r <bar> !./%:r<cr>
-
-" session handling
-" nnoremap <leader>ss :call Session_save()<cr>
-" nnoremap <leader>sl :call Session_load()<cr>
-
 " layout
 nnoremap <leader>ln :NERDTreeToggle<cr>
 nnoremap <leader>lt :TagbarToggle<cr>
-"nnoremap <leader>lg :ConqueGdb<cr>
 nnoremap <leader>lm :MBEToggle<cr>
 nnoremap <leader>lq :copen<cr>
-
+"nnoremap <leader>lg :ConqueGdb<cr>
 " }}}
 
 " {{{ FILETYPES
-
-" {{{ custom highlight
+" {{{ custom highlight (twig)
 augroup filetype_custom_highlight
     autocmd!
     au BufRead,BufNewFile *.twig set filetype=htmljinja
@@ -339,9 +331,8 @@ augroup END
 " {{{ markdown
 augroup filetype_markdown
     autocmd!
-    autocmd FileType markdown setlocal spell
-"    autocmd FileType markdown setlocal spell
-    " autocmd FileType markdown setlocal list
+    "autocmd FileType markdown setlocal spell
+    "autocmd FileType markdown setlocal list
 augroup END
 " }}}
 
@@ -352,7 +343,6 @@ augroup filetype_cpp
      autocmd FileType cpp :iabbrev <buffer> iff if () <cr>{<cr>}jkF
      autocmd FileType cpp nnoremap <buffer> <leader>bo :r ~/_int/dev/misc/c++/template/template.cpp<cr>
 augroup END
-
 " }}}
 
 " {{{ haskell
@@ -365,5 +355,120 @@ augroup filetype_haskell
 "   autocmd FileType haskell setlocal expandtab
 augroup END
 " }}}
-
 " }}}
+
+" ADDED AT WORK
+tnoremap <Esc> <C-\><C-n>
+
+augroup interoMaps
+  au!
+  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
+
+  " Background process and window management
+  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
+  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+
+  " Open intero/GHCi split horizontally
+  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
+  " Open intero/GHCi split vertically
+  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
+  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+
+  " Reloading (pick one)
+  " Automatically reload on save
+  " au BufWritePost *.hs InteroReload
+  " Manually save and reload
+  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
+
+  " Load individual modules
+  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
+  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+
+  " Type-related information
+  " Heads up! These next two differ from the rest.
+  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
+  au FileType haskell map <silent> <leader>T <Plug>InteroType
+  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
+
+  " Navigation
+  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
+
+  " Managing targets
+  " Prompts you to enter targets (no silent):
+  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
+augroup END
+
+" Intero starts automatically. Set this if you'd like to prevent that.
+let g:intero_start_immediately = 0
+
+" Enable type information on hover (when holding cursor at point for ~1 second).
+let g:intero_type_on_hover = 1
+
+" Change the intero window size; default is 10.
+let g:intero_window_size = 10
+
+" Sets the intero window to split vertically; default is horizontal
+let g:intero_vertical_split = 0
+
+" disable neomake
+let g:intero_use_neomake  = 0
+
+" OPTIONAL: Make the update time shorter, so the type info will trigger faster.
+set updatetime=1000
+
+"https://github.com/MarcWeber/hasktags/blob/assets/hasktags.vim
+let g:tagbar_type_haskell = {
+    \ 'ctagsbin'    : 'hasktags',
+    \ 'ctagsargs'   : '-x -c -o-',
+    \ 'kinds'       : [
+        \  'm:modules:0:1',
+        \  'd:data:0:1',
+        \  'd_gadt:data gadt:0:1',
+        \  'nt:newtype:0:1',
+        \  'c:classes:0:1',
+        \  'i:instances:0:1',
+        \  'cons:constructors:0:1',
+        \  'c_gadt:constructor gadt:0:1',
+        \  'c_a:constructor accessors:1:1',
+        \  't:type names:0:1',
+        \  'pt:pattern types:0:1',
+        \  'pi:pattern implementations:0:1',
+        \  'ft:function types:0:1',
+        \  'fi:function implementations:0:1',
+        \  'o:others:0:1'
+    \ ],
+    \ 'sro'          : '.',
+    \ 'kind2scope'   : {
+        \ 'm'        : 'module',
+        \ 'd'        : 'data',
+        \ 'd_gadt'   : 'd_gadt',
+        \ 'c_gadt'   : 'c_gadt',
+        \ 'nt'       : 'newtype',
+        \ 'cons'     : 'cons',
+        \ 'c_a'      : 'accessor',
+        \ 'c'        : 'class',
+        \ 'i'        : 'instance'
+    \ },
+    \ 'scope2kind'   : {
+        \ 'module'   : 'm',
+        \ 'data'     : 'd',
+        \ 'newtype'  : 'nt',
+        \ 'cons'     : 'c_a',
+        \ 'd_gadt'   : 'c_gadt',
+        \ 'class'    : 'ft',
+        \ 'instance' : 'ft'
+    \ }
+\ }
+
+" do not show minibuf
+let g:miniBufExplorerAutoStart = 0
+let g:miniBufExplBRSplit = 0 "put above/left
+let g:miniBufExplVSplit = 20
+let g:miniBufExplSplitToEdge = 0
+let g:miniBufExplMaxSize = 25
+
+let g:intero_load_targets= ["twg"]
+
+let g:ghcid_keep_open = 1
+" show trailing whitespace per default:
+match ErrorMsg /\v +$/
