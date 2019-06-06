@@ -161,3 +161,5 @@ export PROMPT_COMMAND='history -a' #&&history -n'
 
 alias vi="nvim"
 alias vim="nvim"
+
+export PATH=$PATH:/home/miguel/.local/bin
