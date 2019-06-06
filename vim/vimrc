@@ -475,8 +475,9 @@ let g:miniBufExplMaxSize = 25
 let g:intero_load_targets= ["twg"]
 
 let g:ghcid_keep_open = 1
+
 " show trailing whitespace per default:
-match ErrorMsg /\v +$/
+" match ErrorMsg /\v +$/
 
 " let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ackprg = 'ag --vimgrep'
@@ -493,5 +494,4 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 " let g:haskell_classic_highlighting = 1
-
 
