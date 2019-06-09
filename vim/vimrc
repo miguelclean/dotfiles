@@ -363,7 +363,9 @@ augroup END
 " }}}
 
 " ADDED AT WORK
+if has ("nvim")
 tnoremap <Esc> <C-\><C-n>
+endif
 
 augroup interoMaps
   au!

@@ -125,11 +125,11 @@ main = do
                          ((mod4Mask,               xK_F1     ), spawn "xterm -e vim ~/.xmonad/xmonad.hs")
                         ,((mod4Mask              , xK_b      ), sendMessage ToggleStruts)
                         ,((mod4Mask,               xK_p     ), spawn "dmenu_run -nb '#073642' -nf '#fdf6e3' -sb '#268bd2' -sf '#073642'  -fn 'DejaVu Sans-10'")
-                        ,((mod4Mask,               xK_l     ), spawn "slock")
+                        ,((mod4Mask,               xK_x     ), spawn "slock")
                         ,((mod4Mask,               xK_m     ), spawn "xterm -e \"fetchmail&&sleep 2\"")
                         ,((mod4Mask,               xK_c     ), spawn "xterm -e \"echo clipboard&&xclip -o -selection clipboard&&echo&&echo&&echo primary&&xclip -o -selection p&&echo&&echo&&echo [press enter]&&read\"")
                         ,((mod4Mask,               xK_s     ), spawn "import /tmp/screen.png && feh -. /tmp/screen.png")
-                        ,((mod4Mask,               xK_semicolon     ), sendMessage Expand)
+--                        ,((mod4Mask,               xK_l     ), sendMessage Expand)
 
 --                      , ((mod4Mask,               xK_m     ), spawn "notify-send \"$( fetchmail )\"")
                         --,((mod4Mask .|. shiftMask, xK_x     ), spawn "ans=$(zenity  --list  --text 'wanna restart?' --radiolist  --column 'Pick' --column 'Opinion' TRUE '' FALSE 'sudo shutdown -r now' FALSE 'sudo shutdown -h now' ); $ans")
