@@ -309,6 +309,7 @@ nnoremap <leader>cn :cnext<cr>
 nnoremap <leader>cp :cprevious<cr>
 nnoremap <leader>cc :cc<cr>
 nnoremap <leader>cq :copen<cr>
+nnoremap <leader>cQ :cclose<cr>
 
 " buffer navigaion
 nnoremap <leader>bn :MBEbn<cr>
@@ -323,6 +324,10 @@ nnoremap <leader>lm :MBEToggle<cr>
 
 " silver search
 noremap <leader>a :Ack!<Space>
+
+" stylish-haskell
+noremap <leader>sh :!stylish-haskell
+
 " }}}
 
 " {{{ FILETYPES
@@ -353,6 +358,7 @@ augroup END
 " {{{ haskell
 augroup filetype_haskell
     autocmd!
+    autocmd FileType haskell setlocal formatprg=stylish-haskell
 "   autocmd FileType haskell setlocal foldmethod=marker
 "   autocmd Filetype haskell map <F5> :w<ENTER>:term cabal -- exec runghc %<ENTER>
 "   autocmd Filetype haskell map <F5> :w<ENTER>:term make<ENTER>
@@ -374,6 +380,7 @@ augroup interoMaps
   " Background process and window management
   au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
   au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+  au FileType haskell nnoremap <silent> <leader>ir :InteroReload<CR>
 
   " Open intero/GHCi split horizontally
   au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
@@ -474,7 +481,7 @@ let g:miniBufExplVSplit = 20
 let g:miniBufExplSplitToEdge = 0
 let g:miniBufExplMaxSize = 25
 
-let g:intero_load_targets= ["twg"]
+let g:intero_load_targets= ["twg:lib","twg:exe:twg"]
 
 let g:ghcid_keep_open = 1
 
@@ -495,5 +502,5 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:intero_prompt_regex= ' >'
 " let g:haskell_classic_highlighting = 1
-
