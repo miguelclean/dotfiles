@@ -147,6 +147,7 @@ let maplocalleader="\_"
 " }}}
 
 " {{{ misc
+set autoread
 set foldmethod=marker
 set nowrap
 set backspace=2
@@ -373,6 +374,8 @@ augroup END
 augroup filetype_haskell
     autocmd!
     autocmd FileType haskell setlocal formatprg=stylish-haskell
+    autocmd FileType haskell setlocal softtabstop=2
+    autocmd FileType haskell setlocal shiftwidth=2
 "   autocmd FileType haskell setlocal foldmethod=marker
 "   autocmd Filetype haskell map <F5> :w<ENTER>:term cabal -- exec runghc %<ENTER>
 "   autocmd Filetype haskell map <F5> :w<ENTER>:term make<ENTER>
@@ -497,7 +500,7 @@ let g:miniBufExplMaxSize = 25
 
 let g:intero_load_targets= ["twg:lib","twg:exe:twg"]
 
-let g:ghcid_keep_open = 1
+let g:ghcid_keep_open = 0
 
 " show trailing whitespace per default:
 " match ErrorMsg /\v +$/
@@ -518,3 +521,7 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 let g:intero_prompt_regex= ' >'
 " let g:haskell_classic_highlighting = 1
+
+let NERDTreeQuitOnOpen=1
+set ignorecase
+set smartcase
