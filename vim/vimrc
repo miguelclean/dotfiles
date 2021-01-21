@@ -86,23 +86,30 @@ call vundle#begin()
 " Plugin 'dracula/vim'
 " Plugin 'git://ex40.softwarefools.com/vim-potion.git'
 " Plugin 'git://ex40.softwarefools.com/vim-colortune.git'
+" Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'gmarik/Vundle.vim'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'majutsushi/tagbar'
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' } " added at work
+
+Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plugin 'neomake/neomake'
 Plugin 'parsonsmatt/intero-neovim'
-Plugin 'mileszs/ack.vim'
 Plugin 'neovimhaskell/haskell-vim'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -140,6 +147,7 @@ let maplocalleader="\_"
 " }}}
 
 " {{{ misc
+set autoread
 set foldmethod=marker
 set nowrap
 set backspace=2
@@ -181,6 +189,8 @@ nnoremap <C-H> <C-W><C-H>
 
 " {{{ statusline
 set statusline=%f         " Path to the file
+set statusline+=%m         " modified flag
+set statusline+=[%n]         " buffer number
 set statusline+=%=        " Switch to the right side
 set statusline+=%l,%c     " Current line,column
 set statusline+=\ (%L,%P)    " Percentage
@@ -326,8 +336,13 @@ nnoremap <leader>lm :MBEToggle<cr>
 noremap <leader>a :Ack!<Space>
 
 " stylish-haskell
-noremap <leader>sh :!stylish-haskell
+" noremap <leader>sh :!stylish-haskell
 
+" ctrl-space auto complete in insert mode
+inoremap <C-Space> <C-N>
+
+" show list if multiple ctrl-] matches
+nnoremap <C-]> g<C-]>
 " }}}
 
 " {{{ FILETYPES
@@ -359,6 +374,8 @@ augroup END
 augroup filetype_haskell
     autocmd!
     autocmd FileType haskell setlocal formatprg=stylish-haskell
+    autocmd FileType haskell setlocal softtabstop=2
+    autocmd FileType haskell setlocal shiftwidth=2
 "   autocmd FileType haskell setlocal foldmethod=marker
 "   autocmd Filetype haskell map <F5> :w<ENTER>:term cabal -- exec runghc %<ENTER>
 "   autocmd Filetype haskell map <F5> :w<ENTER>:term make<ENTER>
@@ -483,7 +500,7 @@ let g:miniBufExplMaxSize = 25
 
 let g:intero_load_targets= ["twg:lib","twg:exe:twg"]
 
-let g:ghcid_keep_open = 1
+let g:ghcid_keep_open = 0
 
 " show trailing whitespace per default:
 " match ErrorMsg /\v +$/
@@ -504,3 +521,7 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 let g:intero_prompt_regex= ' >'
 " let g:haskell_classic_highlighting = 1
+
+let NERDTreeQuitOnOpen=1
+set ignorecase
+set smartcase
