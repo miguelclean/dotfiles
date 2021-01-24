@@ -114,10 +114,27 @@ fi
 
 # MIGUELS CUSTOM ######################################################
 
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUPSTREAM="verbose,name"
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+#export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$'
+#export PS1=''
+#export PROMPT_COMMAND='__git_ps1 "(%s)"'
+export PROMPT_COMMAND='__git_ps1 "\[\e[1;34m\]\u@\h\[\e[00m\]:\w" " \$ "'
+#export PROMPT_COMMAND="git status -sb"
+#export PS1="\\w\$(__git_ps1 '(%s)') \$ "
+#http://northernmost.org/blog/flush-bash_history-after-each-command/
+# append to the history file, don't overwrite it
+#shopt -s histappend
+#export PROMPT_COMMAND='history -a' #&&history -n'
+
 # bash vi mode
 set -o vi 
 
-export EDITOR=vi
+export EDITOR=vi 
 
 # usenet seriously? 
 # export NNTPSERVER="nntp.aioe.org"
@@ -153,13 +170,12 @@ export MC_SKIN=$HOME/.mc/solarized.ini
 #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 #PS1="\[\033[1;30;44m\] \u@\h\[\033[0;34;43m\]█\[\033[1;30;43m\] \w\[\033[0;33;49m\]█\[\033[0m\] "
 
-#http://northernmost.org/blog/flush-bash_history-after-each-command/
-# append to the history file, don't overwrite it
-#shopt -s histappend
-export PROMPT_COMMAND='history -a' #&&history -n'
 #alias ghci='stack ghci 2>&1 | stack exec HsColour -- -tty'
 
 alias vi="nvim"
 alias vim="nvim"
 
-export PATH=$PATH:/home/miguel/.local/bin
+export PATH=/home/miguel/.local/bin:$PATH
+#alias feh="feh -."
+
+#export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"

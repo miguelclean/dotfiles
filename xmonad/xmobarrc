@@ -1,8 +1,8 @@
 -- vim: set ft=haskell:
 Config { 
 
-      font            = "xft:Sans-10:bold"
-    , additionalFonts = ["xft:FontAwesome-11"]
+      font            = "xft:Hack-12:bold"
+    , additionalFonts = ["xft:Font Awesome 5 Free Solid-12"]
     , bgColor         = "#002b36" 
     , fgColor         = "#657b83"
     , position        = TopW L 95
@@ -41,5 +41,5 @@ Config {
 
     , sepChar   = "%"
     , alignSep  = "}{"
-    , template  = "%StdinReader%}{%mymails% <action=xterm -e sudo iftop><fn=1></fn> %eno1% </action><action=xterm -e htop><fn=1></fn> %multicpu% <fn=1></fn> %coretemp%°C</action> <action=nvidia-settings><fn=1></fn> %gputemp%</action> <fn=1></fn> %memory% (%swap%) <fn=1></fn> %disku% %date% <action=`pavucontrol`><fn=1></fn> </action><action=`systemctl suspend`><fn=1></fn></action>"
+    , template  = "%StdinReader%}{%mymails% <action=xterm -e sudo iftop><fn=1></fn> %eno1% </action><action=xterm -e htop><fn=1></fn> %multicpu% <fn=1></fn> %coretemp%°C</action> <action=nvidia-settings><fn=1></fn> %gputemp%</action> <fn=1></fn> %memory% (%swap%) <fn=1></fn> %disku% %date% <action=`pavucontrol`><fn=1></fn> </action><action=`systemctl suspend`><fn=1></fn></action>"
 }

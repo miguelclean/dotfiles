@@ -86,7 +86,7 @@ main = do
     ,focusedBorderColor      = "#eee8d5"
 --  ,focusFollowsMouse  = False
     ,modMask = mod4Mask
-    ,terminal = "xterm -e tmux"
+    ,terminal = "xterm" -- -e tmux"
 -- if you are using xmonad 0.9, you can avoid web flash videos getting cropped in fullscreen like so:
 --  ,manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig,
 -- no longer needed in 0.10
@@ -99,10 +99,11 @@ main = do
             --        <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig
 
     ,layoutHook = avoidStruts $ layout
-    ,startupHook = do spawnOnSingle "6" "mutt"
-                      spawnOnSingle "6" "mcabber"
-                      spawnOnSingle "6" "weechat"
---                    setWMName "LG3D"
+--    ,startupHook = do spawnOnSingle "6" "mutt"
+--                      spawnOnSingle "6" "mcabber"
+--                      spawnOnSingle "6" "weechat"
+--                      spawnOn "6" "liferea"
+--                      setWMName "LG3D"
     ,logHook = 
             takeTopFocus >>( dynamicLogWithPP $ xmobarPP
                         { 
@@ -122,14 +123,14 @@ main = do
 } `additionalKeys`
                 (
                  [ 
-                         ((mod4Mask,               xK_F1     ), spawn "xterm -e vim ~/.xmonad/xmonad.hs")
-                        ,((mod4Mask              , xK_b      ), sendMessage ToggleStruts)
-                        ,((mod4Mask,               xK_p     ), spawn "dmenu_run -nb '#073642' -nf '#fdf6e3' -sb '#268bd2' -sf '#073642'  -fn 'DejaVu Sans-10'")
-                        ,((mod4Mask,               xK_x     ), spawn "slock")
-                        ,((mod4Mask,               xK_m     ), spawn "xterm -e \"fetchmail&&sleep 2\"")
-                        ,((mod4Mask,               xK_c     ), spawn "xterm -e \"echo clipboard&&xclip -o -selection clipboard&&echo&&echo&&echo primary&&xclip -o -selection p&&echo&&echo&&echo [press enter]&&read\"")
-                        ,((mod4Mask,               xK_s     ), spawn "import /tmp/screen.png && feh -. /tmp/screen.png")
---                        ,((mod4Mask,               xK_l     ), sendMessage Expand)
+                         ((mod4Mask, xK_F1), spawn "xterm -e vim ~/.xmonad/xmonad.hs")
+                        ,((mod4Mask, xK_b ), sendMessage ToggleStruts)
+                        ,((mod4Mask, xK_p ), spawn "dmenu_run -nb '#073642' -nf '#fdf6e3' -sb '#268bd2' -sf '#073642'  -fn 'DejaVu Sans-10'")
+                        ,((mod4Mask, xK_x ), spawn "slock")
+                        ,((mod4Mask, xK_m ), spawn "xterm -e \"fetchmail&&sleep 2\"")
+--                      ,((mod4Mask, xK_c ), spawn "xterm -e \"echo clipboard&&xclip -o -selection clipboard&&echo&&echo&&echo primary&&xclip -o -selection p&&echo&&echo&&echo [press enter]&&read\"")
+--                      ,((mod4Mask, xK_s ), spawn "import /tmp/screen.png && feh -. /tmp/screen.png")
+--                      ,((mod4Mask,               xK_l     ), sendMessage Expand)
 
 --                      , ((mod4Mask,               xK_m     ), spawn "notify-send \"$( fetchmail )\"")
                         --,((mod4Mask .|. shiftMask, xK_x     ), spawn "ans=$(zenity  --list  --text 'wanna restart?' --radiolist  --column 'Pick' --column 'Opinion' TRUE '' FALSE 'sudo shutdown -r now' FALSE 'sudo shutdown -h now' ); $ans")
@@ -152,7 +153,7 @@ main = do
                  ++
                  [
                     ((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.
-                    | (key, sc) <- zip [xK_q,xK_w, xK_e, xK_r] [2,3,0,1] -- change to match your screen order
+                    | (key, sc) <- zip [xK_q,xK_w, xK_e, xK_r] [2,1,0,3] -- change to match your screen order
                     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
                  ] 
                  ++

@@ -1,5 +1,8 @@
-!adobe-*-*-r-*-*-24-*-*-*-*-*-*-*https://wiki.archlinux.org/index.php/x_resources
+!adobe-*-*-r-*-*-24-*-*-*-*-*-*-*
+!https://wiki.archlinux.org/index.php/x_resources
 !https://wiki.archlinux.org/index.php/Xterm
+!https://github.com/adobe-fonts/source-code-pro
+!fc-list | cut -f2 -d: | sort -u
 
 xterm*eightBitInput: false
 xterm*bellIsUrgent: true
@@ -8,12 +11,13 @@ xterm*visualBell: true
 !xterm*font: -misc-fixed-medium-r-semicondensed
 !
 
-XTerm*renderFont: true
+! tell xterm to use the faceName resource
+XTerm*renderFont: true   
 !XTerm*renderFont: false
 !XTerm*faceName: DejaVu Sans Mono
-XTerm*faceName: Source Code Variable
+!XTerm*faceName: Source Code Variable
 !XTerm*faceName: Source Code Pro
-!XTerm*faceName: Inconsolata
+XTerm*faceName: Hack
 XTerm*faceSize: 14
 
 !
@@ -32,7 +36,7 @@ xterm*termName: xterm-256color
 XTerm*locale: true
 XTerm*vt100.locale: true
 xterm*showMissingGlyphs: true
-xterm*letterSpace: -2
+!xterm*letterSpace: 10
 !from vim manual
 !*background:                       black
 !*foreground:                       white
@@ -67,6 +71,12 @@ Xft.hinting: 1
 Xft.antialias: 0
 Xft.rgba: rgb
 
+Xmessage*font:  -adobe-courier-*-r-*--0-250-*-*-p-*-*-*
+
+! ******************************************************
+! 	SOLARIZED THEME
+! ******************************************************
+!
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
 !!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
@@ -145,4 +155,3 @@ Xft.rgba: rgb
 *color7:                S_base2
 *color15:               S_base3
 
-Xmessage*font:  -adobe-courier-*-r-*--0-250-*-*-p-*-*-*
