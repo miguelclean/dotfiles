@@ -1,18 +1,22 @@
 " Miguel's Fresh Vimrc "
 " Started from scratch on 29th Apr 2021
 
+" {{{ vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh'
-    \ }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'junegunn/fzf',                   { 'do': { -> fzf#install() }                }
+Plug 'junegunn/fzf.vim'
+
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+
+Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-stylishask'
 
 call plug#end()
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
+" }}}
 
 " {{{ misc
 colorscheme desert
@@ -25,6 +29,22 @@ set hidden
 set colorcolumn=73
 set backspace=2
 " }}}
+
+syntax on
+filetype plugin indent on
+
+let g:airline_powerline_fonts = 1
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
+
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 " {{{ tabs
 set listchars=tab:>.
@@ -93,4 +113,12 @@ nnoremap <C-]> g<C-]>
 
 " ctrl-space auto complete in insert mode
 inoremap <C-Space> <C-N>
+
+" FZF settings
+nmap <leader>f :Files<cr>|     " fuzzy find files in the working directory (where you launched Vim from)
+nmap <leader>/ :BLines<cr>|    " fuzzy find lines in the current file
+nmap <leader>b :Buffers<cr>|   " fuzzy find an open buffer
+nmap <leader>r :Rg |           " fuzzy find text in the working directory
+nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
+nmap <leader>t :Tags<cr>|      " fuzzy find tags
 " }}}
