@@ -1,45 +1,69 @@
-" Miguel's Fresh Vimrc "
-" Started from scratch on 29th Apr 2021
+" Miguel's Fresh Neovim Config
+" 29th Apr 2021 - 02nd June 2021
 
 " {{{ vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'jnurmine/Zenburn'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
 
 Plug 'junegunn/fzf',                   { 'do': { -> fzf#install() }                }
 Plug 'junegunn/fzf.vim'
 
+Plug 'airblade/vim-gitgutter'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'majutsushi/tagbar'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+"Plug 'rafi/awesome-vim-colorschemes'
+Plug 'jnurmine/Zenburn'
+
+" haskell related
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-stylishask'
 
 call plug#end()
 " }}}
 
-" {{{ misc
-
-" colorscheme desert
-" colorscheme gruvbox
 colorscheme zenburn
 
+" {{{ misc
 set nocompatible
+" set cursorline
+" set cursorcolumn
 set foldmethod=marker
 set nowrap
 set showcmd
-set number
+set number relativenumber
 set hidden
 set colorcolumn=73
 set backspace=2
 " }}}
 
+set updatetime=300
+set signcolumn=yes
+
+" set mouse=a
+
 syntax on
+
+" detect type and autoload plugin and indent files
 filetype plugin indent on
 
+let g:deoplete#enable_at_startup = 1
+
+let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -84,7 +108,8 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 " {{{ tabs
-set listchars=tab:>.
+set listchars=tab:>.,trail:~
+set list
 set tabstop=8
 set expandtab
 set softtabstop=4
