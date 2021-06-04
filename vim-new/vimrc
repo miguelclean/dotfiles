@@ -37,6 +37,7 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 call plug#end()
 " }}}
 
+" 256 colorscheme
 colorscheme zenburn
 
 " {{{ misc
@@ -51,6 +52,10 @@ set hidden
 set colorcolumn=73
 set backspace=2
 " }}}
+
+
+" disable preview window on autocompletion
+set completeopt-=preview
 
 set updatetime=300
 set signcolumn=yes
@@ -69,36 +74,6 @@ let g:airline_powerline_fonts = 1
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
-let g:LanguageClient_diagnosticsDisplay = {
-    \        1: {
-    \            "name": "Error",
-    \            "texthl": "LanguageClientError",
-    \            "signText": "X",
-    \            "signTexthl": "LanguageClientErrorSign",
-    \            "virtualTexthl": "Error"
-    \           },
-    \        2: {
-    \            "name": "Warning",
-    \            "texthl": "LanguageClientWarning",
-    \            "signText": "W",
-    \            "signTexthl": "LanguageClientWarningSign",
-    \            "virtualTexthl": "Todo",
-    \        },
-    \        3: {
-    \            "name": "Information",
-    \            "texthl": "LanguageClientInfo",
-    \            "signText": "i",
-    \            "signTexthl": "LanguageClientInfoSign",
-    \            "virtualTexthl": "Todo",
-    \        },
-    \        4: {
-    \            "name": "Hint",
-    \            "texthl": "LanguageClientInfo",
-    \            "signText": "!",
-    \            "signTexthl": "LanguageClientInfoSign",
-    \            "virtualTexthl": "Todo",
-    \        },
-    \    }
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -126,6 +101,7 @@ set foldlevelstart=0
 " {{{ search
 set hlsearch
 set incsearch
+set ignorecase
 set smartcase
 " }}}
 
@@ -171,6 +147,11 @@ nnoremap <leader>h :nohlsearch<cr>
 
 " show list if multiple ctrl-] matches
 nnoremap <C-]> g<C-]>
+augroup filetype_haskell
+    autocmd!
+    autocmd Filetype haskell nnoremap <C-]> :call LanguageClient#textDocument_definition()<CR>
+    autocmd Filetype haskell nnoremap <leader>i :call LanguageClient#textDocument_hover()<CR>
+augroup END
 
 " ctrl-space auto complete in insert mode
 inoremap <C-Space> <C-N>
@@ -179,7 +160,7 @@ inoremap <C-Space> <C-N>
 nmap <leader>f :Files<cr>|     " fuzzy find files in the working directory (where you launched Vim from)
 nmap <leader>/ :BLines<cr>|    " fuzzy find lines in the current file
 nmap <leader>b :Buffers<cr>|   " fuzzy find an open buffer
-nmap <leader>r :Rg |           " fuzzy find text in the working directory
+nmap <leader>a :Rg |           " fuzzy find text in the working directory
 nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nmap <leader>t :Tags<cr>|      " fuzzy find tags
 " }}}
