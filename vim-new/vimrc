@@ -26,12 +26,13 @@ Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.s
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-"Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'rafi/awesome-vim-colorschemes'
 Plug 'jnurmine/Zenburn'
 
 " haskell related
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-stylishask'
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 call plug#end()
 " }}}
@@ -40,8 +41,8 @@ colorscheme zenburn
 
 " {{{ misc
 set nocompatible
-" set cursorline
 " set cursorcolumn
+set cursorline
 set foldmethod=marker
 set nowrap
 set showcmd
@@ -132,7 +133,7 @@ set smartcase
 set showmatch
 set matchtime=5
 " }}}
- 
+
 " {{{ KEY BINDINGS
 " mapleader
 " use <space> but remap to _ so it is visible for 'showcmd'
@@ -151,11 +152,9 @@ let maplocalleader="\_"
 nnoremap / /\v
 nnoremap ? ?\v
 
-" alt esc in insert mode
+" alt esc
 inoremap jk <esc>
-
-" toggle tabs visibility
-noremap <leader>t :set invlist<CR>
+cnoremap jk <esc>
 
 " easy editing and sourcing of vimrc
 " nnoremap <leader>sv :source $MYVIMRC<cr>
