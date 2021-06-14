@@ -1,5 +1,10 @@
 " Miguel's Fresh Neovim Config
-" 29th Apr 2021 - 02nd June 2021
+" 29th Apr 2021 - 14th June 2021
+"
+" link from ~/.config/nvim/init.vim
+" 1. install vim-plug
+" 2. run :PlugUpdate
+" 3. run :checkhealth
 
 " {{{ vim-plug
 call plug#begin('~/.vim/plugged')
@@ -197,5 +202,5 @@ nmap <leader>a :Rg |           " fuzzy find text in the working directory
 nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nmap <leader>t :Tags<cr>|      " fuzzy find tags
 " }}}
-"
+
 let g:fzf_layout = { 'down': '~40%' }
