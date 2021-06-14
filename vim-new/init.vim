@@ -74,6 +74,39 @@ let g:airline_powerline_fonts = 1
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
+let g:LanguageClient_codeLensDisplay = { "virtualTexthl": "SpellRare" }
+let g:LanguageClient_diagnosticsDisplay =
+\    {
+\        1: {
+\            "name": "Error",
+\            "texthl": "LanguageClientError",
+\            "signText": "x",
+\            "signTexthl": "LanguageClientErrorSign",
+\            "virtualTexthl": "SpellRare",
+\        },
+\        2: {
+\            "name": "Warning",
+\            "texthl": "LanguageClientError",
+\            "signText": "!",
+\            "signTexthl": "LanguageClientWarningSign",
+\            "virtualTexthl": "SpellRare",
+\        },
+\        3: {
+\            "name": "Information",
+\            "texthl": "LanguageClientError",
+\            "signText": "i",
+\            "signTexthl": "LanguageClientInfoSign",
+\            "virtualTexthl": "SpellRare",
+\        },
+\        4: {
+\            "name": "Hint",
+\            "texthl": "LanguageClientError",
+\            "signText": ">",
+\            "signTexthl": "LanguageClientInfoSign",
+\            "virtualTexthl": "SpellRare",
+\        },
+\    }
+
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -164,3 +197,5 @@ nmap <leader>a :Rg |           " fuzzy find text in the working directory
 nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nmap <leader>t :Tags<cr>|      " fuzzy find tags
 " }}}
+"
+let g:fzf_layout = { 'down': '~40%' }
