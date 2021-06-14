@@ -211,4 +211,4 @@ PS1='${(e)git_info[prompt]}$(_miguel_shllvl)$(_prompt_miguel_vimode) %~%f%k%F{$P
 RPS1='%(1j.%K{$PRMPT_COL}%B %j %b%k.) $duration_info $(_miguel_check_last_exit_code)'
 
 export PATH=/home/miguel/.local/bin:$PATH
-[ -f "~/.zshrc.local" ] && source "~/.zshrc.local"
+[ -f "/home/miguel/.zshrc.local" ] && source "/home/miguel/.zshrc.local"
