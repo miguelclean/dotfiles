@@ -39,6 +39,8 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-stylishask'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 " }}}
 
@@ -65,7 +67,7 @@ set completeopt-=preview
 set updatetime=300
 set signcolumn=yes
 
-" set mouse=a
+set mouse=a
 
 syntax on
 

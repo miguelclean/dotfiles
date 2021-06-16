@@ -1,6 +1,6 @@
 if [ -z "$TMUX" ]
 then
-    tmux attach -t TMUX || tmux new -s TMUX
+    tmux -2 attach -t TMUX || tmux -2 new -s TMUX
 fi
 
 # Start configuration added by Zim install {{{
@@ -166,7 +166,7 @@ add-zle-hook-widget -Uz keymap-select _prompt_miguel_keymap_select
 
 typeset -gA git_info
 if (( ${+functions[git-info]} )); then
-  zstyle ':zim:git-info:branch' format '%b'
+  zstyle ':zim:git-info:branch' format '%F{blue}%b%f'
   zstyle ':zim:git-info:commit' format 'HEAD %F{green}(%c)'
   zstyle ':zim:git-info:action' format ' %F{yellow}(${(U):-%s})'
   zstyle ':zim:git-info:stashed' format '\\\$'
