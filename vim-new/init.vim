@@ -1,10 +1,13 @@
 " Miguel's Fresh Neovim Config
-" 29th Apr 2021 - 14th June 2021
+" 29th Apr 2021 - 01st July 2021
 "
 " link from ~/.config/nvim/init.vim
 " 1. install vim-plug
 " 2. run :PlugUpdate
 " 3. run :checkhealth
+
+" TODO
+" explore nvim 0.5+ native lsp-client
 
 " {{{ vim-plug
 call plug#begin('~/.vim/plugged')
@@ -65,7 +68,7 @@ set backspace=2
 set completeopt-=preview
 
 set updatetime=300
-set signcolumn=yes
+set signcolumn=yes:3
 
 set mouse=a
 
@@ -191,6 +194,8 @@ augroup filetype_haskell
     autocmd!
     autocmd Filetype haskell nnoremap <C-]> :call LanguageClient#textDocument_definition()<CR>
     autocmd Filetype haskell nnoremap <leader>i :call LanguageClient#textDocument_hover()<CR>
+    autocmd Filetype haskell set softtabstop=2
+    autocmd Filetype haskell set shiftwidth=2
 augroup END
 
 " ctrl-space auto complete in insert mode
@@ -206,3 +211,46 @@ nmap <leader>t :Tags<cr>|      " fuzzy find tags
 " }}}
 
 let g:fzf_layout = { 'down': '~40%' }
+
+let g:tagbar_type_haskell = {
+    \ 'ctagsbin'    : 'hasktags',
+    \ 'ctagsargs'   : '-x -c -o-',
+    \ 'kinds'       : [
+        \  'm:modules:0:1',
+        \  'd:data:0:1',
+        \  'd_gadt:data gadt:0:1',
+        \  'nt:newtype:0:1',
+        \  'c:classes:0:1',
+        \  'i:instances:0:1',
+        \  'cons:constructors:0:1',
+        \  'c_gadt:constructor gadt:0:1',
+        \  'c_a:constructor accessors:1:1',
+        \  't:type names:0:1',
+        \  'pt:pattern types:0:1',
+        \  'pi:pattern implementations:0:1',
+        \  'ft:function types:0:1',
+        \  'fi:function implementations:0:1',
+        \  'o:others:0:1'
+    \ ],
+    \ 'sro'          : '.',
+    \ 'kind2scope'   : {
+        \ 'm'        : 'module',
+        \ 'd'        : 'data',
+        \ 'd_gadt'   : 'd_gadt',
+        \ 'c_gadt'   : 'c_gadt',
+        \ 'nt'       : 'newtype',
+        \ 'cons'     : 'cons',
+        \ 'c_a'      : 'accessor',
+        \ 'c'        : 'class',
+        \ 'i'        : 'instance'
+    \ },
+    \ 'scope2kind'   : {
+        \ 'module'   : 'm',
+        \ 'data'     : 'd',
+        \ 'newtype'  : 'nt',
+        \ 'cons'     : 'c_a',
+        \ 'd_gadt'   : 'c_gadt',
+        \ 'class'    : 'ft',
+        \ 'instance' : 'ft'
+    \ }
+\ }

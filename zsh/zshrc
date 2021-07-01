@@ -129,8 +129,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#aaaaff,underline"
 
-alias vi=nvim
-EDITOR=nvim
+alias vi=/home/miguel/nvim.appimage
+alias bell='echo "\a"'
+EDITOR=/home/miguel/nvim.appimage
 
 [ -f "/home/miguel/.ghcup/env" ] && source "/home/miguel/.ghcup/env" # ghcup-env
 
