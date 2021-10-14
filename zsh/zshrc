@@ -129,11 +129,11 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#aaaaff,underline"
 
-alias vi=/home/miguel/nvim.appimage
 alias bell='echo "\a"'
-EDITOR=/home/miguel/nvim.appimage
+alias vi=$HOME/nvim.appimage
+export EDITOR=$HOME/nvim.appimage
 
-[ -f "/home/miguel/.ghcup/env" ] && source "/home/miguel/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 bindkey -M viins 'jk' vi-cmd-mode
 
@@ -211,5 +211,9 @@ add-zsh-hook precmd git-info
 PS1='${(e)git_info[prompt]}$(_miguel_shllvl)$(_prompt_miguel_vimode) %~%f%k%F{$PRMPT_COL}%f '
 RPS1='%(1j.%K{$PRMPT_COL}%B %j %b%k.) $duration_info $(_miguel_check_last_exit_code)'
 
-export PATH=/home/miguel/.local/bin:$PATH
-[ -f "/home/miguel/.zshrc.local" ] && source "/home/miguel/.zshrc.local"
+export PATH=$HOME/.local/bin:$PATH
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+
+source $HOME/.cargo/env
+
+cd $HOME
