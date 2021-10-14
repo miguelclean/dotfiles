@@ -194,6 +194,7 @@ augroup filetype_haskell
     autocmd!
     autocmd Filetype haskell nnoremap <C-]> :call LanguageClient#textDocument_definition()<CR>
     autocmd Filetype haskell nnoremap <leader>i :call LanguageClient#textDocument_hover()<CR>
+    autocmd Filetype haskell nnoremap <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
     autocmd Filetype haskell set softtabstop=2
     autocmd Filetype haskell set shiftwidth=2
 augroup END
