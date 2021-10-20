@@ -209,6 +209,8 @@ nmap <leader>b :Buffers<cr>|   " fuzzy find an open buffer
 nmap <leader>a :Rg |           " fuzzy find text in the working directory
 nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nmap <leader>t :Tags<cr>|      " fuzzy find tags
+
+nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))
 " }}}
 
 let g:fzf_layout = { 'down': '~40%' }
