@@ -213,7 +213,6 @@ RPS1='%(1j.%K{$PRMPT_COL}%B %j %b%k.) $duration_info $(_miguel_check_last_exit_c
 
 export PATH=$HOME/.local/bin:$PATH
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
-
-source $HOME/.cargo/env
+[ -f "$HOME/.cargo/env" ]   && source "$HOME/.cargo/env"
 
 cd $HOME
