@@ -1,5 +1,5 @@
 " Miguel's Fresh Neovim Config
-" 29th Apr 2021 - 01st July 2021
+" 29th Apr 2021 - ...
 "
 " link from ~/.config/nvim/init.vim
 " 1. install vim-plug
@@ -34,15 +34,20 @@ Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.s
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 " Plug 'rafi/awesome-vim-colorschemes'
 Plug 'jnurmine/Zenburn'
+" try community gruvbox?
 
 " haskell related
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-stylishask'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
-Plug 'christoomey/vim-tmux-navigator'
+" agda
+Plug 'derekelkins/agda-vim' " requires python2 / pip2 :(
+" try language-server as well
 
 call plug#end()
 " }}}
