@@ -73,7 +73,7 @@ set backspace=2
 set completeopt-=preview
 
 set updatetime=300
-set signcolumn=yes:3
+set signcolumn=yes
 
 set mouse=a
 

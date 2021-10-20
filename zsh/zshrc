@@ -128,12 +128,11 @@ bindkey -M vicmd 'j' history-substring-search-down
 # }}} End configuration added by Zim install
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#aaaaff,underline"
-
 alias bell='echo "\a"'
-alias vi=$HOME/nvim.appimage
-export EDITOR=$HOME/nvim.appimage
 
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+export EDITOR=nvim
+[ -f "$HOME/nvim.appimage" ] && export EDITOR=$HOME/nvim.appimage
+alias vi=$EDITOR
 
 bindkey -M viins 'jk' vi-cmd-mode
 
@@ -212,7 +211,9 @@ PS1='${(e)git_info[prompt]}$(_miguel_shllvl)$(_prompt_miguel_vimode) %~%f%k%F{$P
 RPS1='%(1j.%K{$PRMPT_COL}%B %j %b%k.) $duration_info $(_miguel_check_last_exit_code)'
 
 export PATH=$HOME/.local/bin:$PATH
+
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
-[ -f "$HOME/.cargo/env" ]   && source "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env"   ] && source "$HOME/.cargo/env"
+[ -f "$HOME/.ghcup/env"   ] && source "$HOME/.ghcup/env"
 
 cd $HOME
