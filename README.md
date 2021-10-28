@@ -1,1 +1,1 @@
-hi
+just run dotfiles.sh
