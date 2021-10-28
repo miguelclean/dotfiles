@@ -1,7 +1,8 @@
 " Miguel's Fresh Neovim Config
 " 29th Apr 2021 - now
 "
-" link from ~/.config/nvim/init.vim
+" link ./init.vim <- ~/.config/nvim/init.vim
+" link ./plugin/  <- ~/.config/nvim/plugin/
 " 1. install vim-plug
 " 2. run :PlugUpdate
 " 3. run :checkhealth
