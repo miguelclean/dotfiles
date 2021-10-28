@@ -1,5 +1,5 @@
 " Miguel's Fresh Neovim Config
-" 29th Apr 2021 - ...
+" 29th Apr 2021 - now
 "
 " link from ~/.config/nvim/init.vim
 " 1. install vim-plug
@@ -8,6 +8,9 @@
 
 " TODO
 " explore nvim 0.5+ native lsp-client
+" explore tree-sitter parser generator
+" watch youtube: ThePrimeagen / GregHurrell
+" consider nvim-telescope/telescope plugin
 
 " {{{ vim-plug
 call plug#begin('~/.vim/plugged')
@@ -37,8 +40,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Plug 'rafi/awesome-vim-colorschemes'
-Plug 'jnurmine/Zenburn'
-" try community gruvbox?
+Plug 'jnurmine/Zenburn' " try gruvbox-community/gruvbox?
+
+Plug 'mbbill/undotree'
 
 " haskell related
 Plug 'neovimhaskell/haskell-vim'
@@ -62,12 +66,20 @@ set cursorline
 set foldmethod=marker
 set nowrap
 set showcmd
-set number relativenumber
+set number
+set relativenumber
 set hidden
-set colorcolumn=73
+set colorcolumn=80
 set backspace=2
 " }}}
 
+set noswapfile
+set nobackup
+set undofile
+set undodir=~/.vim/undodir
+
+set guicursor=
+set noerrorbells
 
 " disable preview window on autocompletion
 set completeopt-=preview
@@ -135,8 +147,8 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 set listchars=tab:>.,trail:~
 set list
 set tabstop=8
-set expandtab
 set softtabstop=4
+set expandtab
 set shiftwidth=4
 set shiftround
 " }}}
@@ -152,6 +164,7 @@ set incsearch
 set ignorecase
 set smartcase
 " }}}
+set scrolloff=8
 
 " {{{ match brackets
 set showmatch
@@ -195,13 +208,14 @@ nnoremap <leader>h :nohlsearch<cr>
 
 " show list if multiple ctrl-] matches
 nnoremap <C-]> g<C-]>
+
 augroup filetype_haskell
     autocmd!
-    autocmd Filetype haskell nnoremap <C-]> :call LanguageClient#textDocument_definition()<CR>
-    autocmd Filetype haskell nnoremap <leader>i :call LanguageClient#textDocument_hover()<CR>
-    autocmd Filetype haskell nnoremap <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
-    autocmd Filetype haskell set softtabstop=2
-    autocmd Filetype haskell set shiftwidth=2
+    autocmd Filetype haskell nnoremap <buffer> <C-]>     :call LanguageClient#textDocument_definition()<CR>
+    autocmd Filetype haskell nnoremap <buffer> <leader>i :call LanguageClient#textDocument_hover()<CR>
+    autocmd Filetype haskell nnoremap <buffer> <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
+    autocmd Filetype haskell setlocal softtabstop=2
+    autocmd Filetype haskell setlocal shiftwidth=2
 augroup END
 
 " ctrl-space auto complete in insert mode
@@ -215,8 +229,11 @@ nmap <leader>a :Rg |           " fuzzy find text in the working directory
 nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nmap <leader>t :Tags<cr>|      " fuzzy find tags
 
-nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))
+nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))<CR>
 " }}}
+
+" write current file as superuser
+cmap w!! w !sudo tee % > /dev/null
 
 let g:fzf_layout = { 'down': '~40%' }
 
