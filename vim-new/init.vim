@@ -79,7 +79,7 @@ set nobackup
 set undofile
 set undodir=~/.vim/undodir
 
-set guicursor=
+" set guicursor=
 set noerrorbells
 
 " disable preview window on autocompletion
