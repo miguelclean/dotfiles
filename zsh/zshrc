@@ -172,10 +172,13 @@ if (( ${+functions[git-info]} )); then
   zstyle ':zim:git-info:stashed' format '\\\$'
   zstyle ':zim:git-info:unindexed' format '!'
   zstyle ':zim:git-info:indexed' format '+'
-  zstyle ':zim:git-info:ahead' format '>'
-  zstyle ':zim:git-info:behind' format '<'
+  zstyle ':zim:git-info:untracked' format '?'
+  zstyle ':zim:git-info:ahead' format '%A>'
+  zstyle ':zim:git-info:behind' format '%B<'
+#  zstyle ':zim:git-info' ignore-submodules 'none'
+  zstyle ':zim:git-info' verbose yes
   zstyle ':zim:git-info:keys' format \
-      'status' '%S%I%i%A%B' \
+      'status' '%u%S%I%i%A%B' \
       'prompt' '%F{white}%b%c%s${(e)git_info[status]:+" %F{red}[${(e)git_info[status]}]"}%f
 '
   add-zsh-hook precmd git-info
