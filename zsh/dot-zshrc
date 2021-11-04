@@ -135,6 +135,8 @@ alias bell='echo "\a"'
 export EDITOR=nvim
 [ -f "$HOME/nvim.appimage" ] && export EDITOR=$HOME/nvim.appimage
 alias vi=$EDITOR
+alias vim=$EDITOR
+alias nvim=$EDITOR
 
 bindkey -M viins 'jk' vi-cmd-mode
 

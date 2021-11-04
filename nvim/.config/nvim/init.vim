@@ -3,7 +3,7 @@
 "
 " link ./init.vim <- ~/.config/nvim/init.vim
 " link ./plugin/  <- ~/.config/nvim/plugin/
-" 1. install vim-plug
+" 1. install vim-plug / why not :h packages?
 " 2. run :PlugUpdate
 " 3. run :checkhealth
 
@@ -16,13 +16,15 @@
 " {{{ vim-plug
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-eunuch'
 
 Plug 'junegunn/fzf',                   { 'do': { -> fzf#install() }                }
 Plug 'junegunn/fzf.vim'
@@ -35,13 +37,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 Plug 'christoomey/vim-tmux-navigator'
-
-" Plug 'rafi/awesome-vim-colorschemes'
-Plug 'jnurmine/Zenburn' " try gruvbox-community/gruvbox?
 
 Plug 'mbbill/undotree'
 
@@ -50,9 +47,16 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-stylishask'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
-" agda
-Plug 'derekelkins/agda-vim' " requires python2 / pip2 :(
-" try language-server as well
+" agda related / requires python2 / pip2 :(
+Plug 'derekelkins/agda-vim'
+
+" colors / style
+" rafi/awesome-vim-colorschemes?
+" gruvbox-community/gruvbox?
+Plug 'jnurmine/Zenburn'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 " }}}
@@ -234,7 +238,7 @@ nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))<CR>
 " }}}
 
 " write current file as superuser
-cmap w!! w !sudo tee % > /dev/null
+cmap w!! SudoWrite
 
 let g:fzf_layout = { 'down': '~40%' }
 
