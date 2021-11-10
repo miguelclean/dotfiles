@@ -1,1 +1,1 @@
-stow --target=$HOME --dotfiles -vv tmux zsh nvim
+stow --target=$HOME --dotfiles -vv tmux zsh nvim git
