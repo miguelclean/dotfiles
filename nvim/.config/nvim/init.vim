@@ -64,6 +64,7 @@ call plug#end()
 " 256 colorscheme
 colorscheme zenburn
 
+
 " {{{ misc
 set nocompatible
 " set cursorcolumn
@@ -236,6 +237,14 @@ nmap <leader>t :Tags<cr>|      " fuzzy find tags
 
 nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))<CR>
 " }}}
+
+hi DiffAdd    ctermfg=none ctermbg=23
+hi DiffDelete ctermfg=none ctermbg=52
+hi DiffChange ctermfg=none ctermbg=236
+hi DiffText   ctermfg=none ctermbg=94
+
+nnoremap <leader>dd :wincmd gf<cr>:Gvdiff! develop2<cr>
+nnoremap <leader>tc :tabc<cr>
 
 " write current file as superuser
 cmap w!! SudoWrite
