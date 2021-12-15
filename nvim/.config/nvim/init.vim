@@ -106,6 +106,7 @@ let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+let g:LanguageClient_autoStart = 0
 let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
 let g:LanguageClient_codeLensDisplay = { "virtualTexthl": "SpellRare" }
 let g:LanguageClient_diagnosticsDisplay =
