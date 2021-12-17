@@ -64,6 +64,9 @@ call plug#end()
 " 256 colorscheme
 colorscheme zenburn
 
+" experimental
+" autocmd TextChanged,InsertLeave * if &readonly==0 && filereadable(bufname('%')) | silent update | endif
+
 
 " {{{ misc
 set nocompatible
