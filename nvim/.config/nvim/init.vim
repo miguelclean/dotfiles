@@ -26,6 +26,8 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 
+Plug 'godlygeek/tabular'
+
 Plug 'junegunn/fzf',                   { 'do': { -> fzf#install() }                }
 Plug 'junegunn/fzf.vim'
 
@@ -41,6 +43,7 @@ Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.s
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'mbbill/undotree'
+
 
 " haskell related
 Plug 'neovimhaskell/haskell-vim'

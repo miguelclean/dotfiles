@@ -1,6 +1,6 @@
 [user]
-	name = Miguel
-	email = m.i@gmx.at
+	name = Michal Idziorek
+        email = m.i@gmx.at
 
 [merge]
     tool = vimdiff
@@ -20,9 +20,9 @@
     prompt = true
 
 [pager]
-    diff = delta
-    show = delta
-    log = delta
+    diff   = delta
+    show   = delta
+    log    = delta
     reflog = delta
 
 [interactive]

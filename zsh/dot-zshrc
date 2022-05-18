@@ -1,7 +1,9 @@
-if [ -z "$TMUX" ]
-then
-    tmux -2 attach -t TMUX || tmux -2 new -s TMUX
-fi
+#if [ -z "$TMUX" ]
+#then
+#    tmux -2 attach -t TMUX || tmux -2 new -s TMUX
+#fi
+
+export ZIM_HOME=$HOME/.zim
 
 # Start configuration added by Zim install {{{
 #
@@ -226,3 +228,5 @@ export PATH=$HOME/.local/bin:$PATH
 eval "$(direnv hook zsh)"
 
 cd $HOME
+
+if [ -e /home/miguel/.nix-profile/etc/profile.d/nix.sh ]; then . /home/miguel/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

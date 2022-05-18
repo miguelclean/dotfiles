@@ -1,0 +1,21 @@
+import qualified Data.Text as T
+import qualified Data.List as L
+
+:seti -XOverloadedStrings
+
+:set prompt "\ESC[0;36m\STX%s\n\ESC[0;34m\STXλ> \ESC[m\STX"
+:set prompt-cont "\ESC[0;33m\STX|> \ESC[m\STX"
+
+:{
+dotGHCI_myPrint :: (Show a) => a -> IO ()
+dotGHCI_myPrint a = putStrLn $ "\n\ESC[0;33m\STX" <> show a <> "\ESC[m\STX"
+:}
+
+:seti -interactive-print dotGHCI_myPrint
+
+-- :def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
+
+:set +t
+:set +m
+:set +s
+
