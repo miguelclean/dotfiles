@@ -1,17 +1,18 @@
 " Miguel's Fresh Neovim Config
-" 29th Apr 2021 - now
+" since 29th Apr 2021
 "
 " link ./init.vim <- ~/.config/nvim/init.vim
 " link ./plugin/  <- ~/.config/nvim/plugin/
+"
 " 1. install vim-plug / why not :h packages?
 " 2. run :PlugUpdate
 " 3. run :checkhealth
 
 " TODO
-" explore nvim 0.5+ native lsp-client
-" explore tree-sitter parser generator
 " watch youtube: ThePrimeagen / GregHurrell
-" consider nvim-telescope/telescope plugin
+" split into mutiple files
+" tree-sitter parser generator
+" nvim-telescope/telescope plugin
 
 " {{{ vim-plug
 call plug#begin('~/.vim/plugged')
@@ -37,13 +38,12 @@ Plug 'majutsushi/tagbar'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-
+"Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'neovim/nvim-lspconfig'
 
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'mbbill/undotree'
-
 
 " haskell related
 Plug 'neovimhaskell/haskell-vim'
@@ -111,42 +111,44 @@ let g:deoplete#enable_at_startup = 1
 let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-let g:LanguageClient_autoStart = 0
-let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
-let g:LanguageClient_codeLensDisplay = { "virtualTexthl": "SpellRare" }
-let g:LanguageClient_diagnosticsDisplay =
-\    {
-\        1: {
-\            "name": "Error",
-\            "texthl": "LanguageClientError",
-\            "signText": "x",
-\            "signTexthl": "LanguageClientErrorSign",
-\            "virtualTexthl": "SpellRare",
-\        },
-\        2: {
-\            "name": "Warning",
-\            "texthl": "LanguageClientError",
-\            "signText": "!",
-\            "signTexthl": "LanguageClientWarningSign",
-\            "virtualTexthl": "SpellRare",
-\        },
-\        3: {
-\            "name": "Information",
-\            "texthl": "LanguageClientError",
-\            "signText": "i",
-\            "signTexthl": "LanguageClientInfoSign",
-\            "virtualTexthl": "SpellRare",
-\        },
-\        4: {
-\            "name": "Hint",
-\            "texthl": "LanguageClientError",
-\            "signText": ">",
-\            "signTexthl": "LanguageClientInfoSign",
-\            "virtualTexthl": "SpellRare",
-\        },
-\    }
+lua require('lspconfig').hls.setup{}
 
+" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" let g:LanguageClient_loggingFile= "~/LanguageClient.log"
+" let g:LanguageClient_autoStart = 0
+" let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
+" let g:LanguageClient_codeLensDisplay = { "virtualTexthl": "SpellRare" }
+" let g:LanguageClient_diagnosticsDisplay =
+" \    {
+" \        1: {
+" \            "name": "Error",
+" \            "texthl": "LanguageClientError",
+" \            "signText": "x",
+" \            "signTexthl": "LanguageClientErrorSign",
+" \            "virtualTexthl": "SpellRare",
+" \        },
+" \        2: {
+" \            "name": "Warning",
+" \            "texthl": "LanguageClientError",
+" \            "signText": "!",
+" \            "signTexthl": "LanguageClientWarningSign",
+" \            "virtualTexthl": "SpellRare",
+" \        },
+" \        3: {
+" \            "name": "Information",
+" \            "texthl": "LanguageClientError",
+" \            "signText": "i",
+" \            "signTexthl": "LanguageClientInfoSign",
+" \            "virtualTexthl": "SpellRare",
+" \        },
+" \        4: {
+" \            "name": "Hint",
+" \            "texthl": "LanguageClientError",
+" \            "signText": ">",
+" \            "signTexthl": "LanguageClientInfoSign",
+" \            "virtualTexthl": "SpellRare",
+" \        },
+" \    }
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -177,6 +179,7 @@ set incsearch
 set ignorecase
 set smartcase
 " }}}
+
 set scrolloff=8
 
 " {{{ match brackets
@@ -224,9 +227,9 @@ nnoremap <C-]> g<C-]>
 
 augroup filetype_haskell
     autocmd!
-    autocmd Filetype haskell nnoremap <buffer> <C-]>     :call LanguageClient#textDocument_definition()<CR>
-    autocmd Filetype haskell nnoremap <buffer> <leader>i :call LanguageClient#textDocument_hover()<CR>
-    autocmd Filetype haskell nnoremap <buffer> <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
+    " autocmd Filetype haskell nnoremap <buffer> <C-]>     :call LanguageClient#textDocument_definition()<CR>
+    " autocmd Filetype haskell nnoremap <buffer> <leader>i :call LanguageClient#textDocument_hover()<CR>
+    " autocmd Filetype haskell nnoremap <buffer> <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
     autocmd Filetype haskell setlocal softtabstop=2
     autocmd Filetype haskell setlocal shiftwidth=2
 augroup END
