@@ -73,7 +73,7 @@ colorscheme zenburn
 
 " {{{ misc
 set nocompatible
-" set cursorcolumn
+set cursorcolumn
 set cursorline
 set foldmethod=marker
 set nowrap
@@ -112,43 +112,6 @@ let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 
 lua require('lspconfig').hls.setup{}
-
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" let g:LanguageClient_loggingFile= "~/LanguageClient.log"
-" let g:LanguageClient_autoStart = 0
-" let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
-" let g:LanguageClient_codeLensDisplay = { "virtualTexthl": "SpellRare" }
-" let g:LanguageClient_diagnosticsDisplay =
-" \    {
-" \        1: {
-" \            "name": "Error",
-" \            "texthl": "LanguageClientError",
-" \            "signText": "x",
-" \            "signTexthl": "LanguageClientErrorSign",
-" \            "virtualTexthl": "SpellRare",
-" \        },
-" \        2: {
-" \            "name": "Warning",
-" \            "texthl": "LanguageClientError",
-" \            "signText": "!",
-" \            "signTexthl": "LanguageClientWarningSign",
-" \            "virtualTexthl": "SpellRare",
-" \        },
-" \        3: {
-" \            "name": "Information",
-" \            "texthl": "LanguageClientError",
-" \            "signText": "i",
-" \            "signTexthl": "LanguageClientInfoSign",
-" \            "virtualTexthl": "SpellRare",
-" \        },
-" \        4: {
-" \            "name": "Hint",
-" \            "texthl": "LanguageClientError",
-" \            "signText": ">",
-" \            "signTexthl": "LanguageClientInfoSign",
-" \            "virtualTexthl": "SpellRare",
-" \        },
-" \    }
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -209,6 +172,9 @@ nnoremap ? ?\v
 inoremap jk <esc>
 cnoremap jk <esc>
 
+" esc in term
+tnoremap <Esc> <C-\><C-n>
+
 " easy editing and sourcing of vimrc
 " nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :e $MYVIMRC<cr>
@@ -225,14 +191,11 @@ nnoremap <leader>h :nohlsearch<cr>
 " show list if multiple ctrl-] matches
 nnoremap <C-]> g<C-]>
 
-augroup filetype_haskell
-    autocmd!
-    " autocmd Filetype haskell nnoremap <buffer> <C-]>     :call LanguageClient#textDocument_definition()<CR>
-    " autocmd Filetype haskell nnoremap <buffer> <leader>i :call LanguageClient#textDocument_hover()<CR>
-    " autocmd Filetype haskell nnoremap <buffer> <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
-    autocmd Filetype haskell setlocal softtabstop=2
-    autocmd Filetype haskell setlocal shiftwidth=2
-augroup END
+" misc
+nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))<CR>
+nnoremap <leader>cc :set invcursorcolumn<CR>
+nnoremap <leader>dd :wincmd gf<cr>:Gvdiff! develop2<cr>
+nnoremap <leader>tc :tabc<cr>
 
 " ctrl-space auto complete in insert mode
 inoremap <C-Space> <C-N>
@@ -245,7 +208,28 @@ nmap <leader>a :Rg |           " fuzzy find text in the working directory
 nmap <leader>c :Commands<cr>|  " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nmap <leader>t :Tags<cr>|      " fuzzy find tags
 
-nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))<CR>
+" haskell specific
+augroup filetype_haskell
+    autocmd!
+     autocmd Filetype haskell nnoremap <buffer> <C-]>     :lua vim.lsp.buf.definition()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>i :lua vim.lsp.buf.hover()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>q :lua vim.lsp.buf.code_action()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>r :lua vim.lsp.buf.references()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>s :lua vim.lsp.buf.document_symbol()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>S :lua vim.lsp.buf.workspace_symbol()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>m :lua vim.diagnostic.open_float()<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>e :lua vim.diagnostic.setloclist({open = true})<CR>
+     autocmd Filetype haskell nnoremap <buffer> <leader>E :lua vim.diagnostic.setqflist({open = true})<CR>
+
+" vim.lsp.buf.formatting()
+" vim.lsp.buf.rename() ?
+" print(vim.lsp.buf.server_ready())  
+
+    " autocmd Filetype haskell nnoremap <buffer> <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
+    autocmd Filetype haskell setlocal softtabstop=2
+    autocmd Filetype haskell setlocal shiftwidth=2
+augroup END
+
 " }}}
 
 hi DiffAdd    ctermfg=none ctermbg=23
@@ -253,8 +237,6 @@ hi DiffDelete ctermfg=none ctermbg=52
 hi DiffChange ctermfg=none ctermbg=236
 hi DiffText   ctermfg=none ctermbg=94
 
-nnoremap <leader>dd :wincmd gf<cr>:Gvdiff! develop2<cr>
-nnoremap <leader>tc :tabc<cr>
 
 " write current file as superuser
 cmap w!! SudoWrite

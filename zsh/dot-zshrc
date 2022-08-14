@@ -229,4 +229,4 @@ eval "$(direnv hook zsh)"
 
 cd $HOME
 
-if [ -e /home/miguel/.nix-profile/etc/profile.d/nix.sh ]; then . /home/miguel/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# if [ -e /home/miguel/.nix-profile/etc/profile.d/nix.sh ]; then . /home/miguel/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
