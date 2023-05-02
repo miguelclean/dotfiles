@@ -1,7 +1,7 @@
 " ============================
 " Miguel's Fresh Neovim Config
 " ============================
-" 29th Apr 2021 - 27th Apr 2023
+" 29th Apr 2021 - 2nd May 2023
 "
 " {{{ INSTALLATION
 "
@@ -24,52 +24,64 @@
 "
 " }}}
 
-" {{{ vim-plug
+" {{{ VIM-PLUG
 call plug#begin('~/.vim/plugged')
 
-" colors
+" COLOR
 Plug 'jnurmine/Zenburn'
 
-" lualine
+" STATUSLINE
 Plug 'nvim-lualine/lualine.nvim'
 
-" tpope!
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-dadbod'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-eunuch'
+" TPOPE
+Plug 'tpope/vim-commentary' " comment/uncomment
+Plug 'tpope/vim-dadbod'     " database interface
+Plug 'tpope/vim-dispatch'   " dispatch async
+Plug 'tpope/vim-eunuch'     " common shell commands 
+Plug 'tpope/vim-fugitive'   " git wrapper
+Plug 'tpope/vim-sensible'   " reasonable defaults
+Plug 'tpope/vim-surround'   " xml tags
+Plug 'tpope/vim-unimpaired' " brackets
+Plug 'tpope/vim-vinegar'    " enhance netrw
 
-Plug 'godlygeek/tabular'
+" auto-align
+Plug 'godlygeek/tabular'   
 
+" fuzzy finder
 " consider telescope & fzf-lua instead below
 Plug 'junegunn/fzf',                   { 'do': { -> fzf#install() }                }
 Plug 'junegunn/fzf.vim'
 
+" git diff symbols
 Plug 'airblade/vim-gitgutter'
-Plug 'nelstrom/vim-visual-star-search'
+
+" undotree visualizer
+Plug 'mbbill/undotree'
+
+" browse tags
 Plug 'majutsushi/tagbar'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" ??? need that?
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" lsp
+" navigate between splits (integrates with tmux)
+Plug 'christoomey/vim-tmux-navigator' 
+
+" select in visual mode and search with `*`
+Plug 'nelstrom/vim-visual-star-search'
+
+" LANGUAGE SERVER PROTOCOL
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
 
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'mbbill/undotree'
-
 " LANGUAGE SPECIFIC 
-
+"
 " Haskell
-Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-stylishask' " let hls run this?
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+"check: https://wiki.haskell.org/Vim
+"try: haskell-tools.nvim ?
+Plug 'neovimhaskell/haskell-vim' " highlight and indent (hls instead?)
+Plug 'alx741/vim-stylishask' " maybe let hls run this instead?
+"Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 " Agda 
 Plug 'derekelkins/agda-vim' "this requires python2 / pip2 :(
@@ -77,7 +89,7 @@ Plug 'derekelkins/agda-vim' "this requires python2 / pip2 :(
 call plug#end()
 " }}}
 
-" {{{ colors
+" {{{ COLORS & FILETYPE
 colorscheme zenburn
 
 syntax on
@@ -86,9 +98,12 @@ hi DiffAdd    ctermfg=none ctermbg=23
 hi DiffDelete ctermfg=none ctermbg=52
 hi DiffChange ctermfg=none ctermbg=236
 hi DiffText   ctermfg=none ctermbg=94
+
+" detect type and autoload plugin and indent files
+filetype plugin indent on
 " }}}
 
-" {{{ options
+" {{{ OPTIONS
 set nocompatible
 set cursorcolumn
 set cursorline
@@ -108,24 +123,10 @@ set noerrorbells
 set updatetime=1000
 set signcolumn=yes
 set mouse=a
-" disable preview window on autocompletion
+set scrolloff=8
 set completeopt-=preview
-" }}}
 
-" detect type and autoload plugin and indent files
-filetype plugin indent on
-
-let g:deoplete#enable_at_startup = 1
-
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
-
-" {{{ tabs
+" tabs
 set listchars=tab:>.,trail:~
 set list
 set tabstop=8
@@ -133,25 +134,21 @@ set softtabstop=4
 set expandtab
 set shiftwidth=4
 set shiftround
-" }}}
 
-" {{{ folding
+" folding
 set foldcolumn=5
 set foldlevelstart=0
-" }}}
 
-" {{{ search
+" search
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-" }}}
 
-set scrolloff=8
-
-" {{{ match brackets
+" match brackets
 set showmatch
 set matchtime=5
+
 " }}}
 
 " {{{ KEY BINDINGS
@@ -161,12 +158,8 @@ nmap <space> _
 let mapleader="\_"
 let maplocalleader="\_"
 
-" get rid of bad habits. (might break other stuff eg. in cygwin)
-" inoremap <esc> <nop>
-" inoremap <Up> <nop>
-" inoremap <Down> <nop>
-" inoremap <Left> <nop>
-" inoremap <Right> <nop>
+" write current file as superuser
+cmap w!! SudoWrite
 
 " activate 'very magic' for searches automatically
 nnoremap / /\v
@@ -180,8 +173,8 @@ cnoremap jk <esc>
 tnoremap <Esc> <C-\><C-n>
 
 " easy editing and sourcing of vimrc
-" nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :e $MYVIMRC<cr>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " turn off search highlight
 nnoremap <leader>h :nohlsearch<cr>
@@ -189,17 +182,11 @@ nnoremap <leader>h :nohlsearch<cr>
 " layout
 "nnoremap <leader>ln :NERDTreeToggle<cr>
 
-" silver search
-"noremap <leader>a :Ack!<Space>
-
-" show list if multiple ctrl-] matches
+" show list on multiple matches
 nnoremap <C-]> g<C-]>
 
 " misc
 nmap <leader>q :call setqflist(filter(getqflist(),"v:val['type'] == 'E'"))<CR>
-nnoremap <leader>cc :set invcursorcolumn<CR>
-nnoremap <leader>dd :wincmd gf<cr>:Gvdiff! develop2<cr>
-nnoremap <leader>tc :tabc<cr>
 
 " ctrl-space auto complete in insert mode
 inoremap <C-Space> <C-X><C-O>
@@ -227,22 +214,27 @@ augroup filetype_haskell
     autocmd Filetype haskell nnoremap <buffer> <leader>l :lua vim.lsp.codelens.run()<CR>
     autocmd Filetype haskell nnoremap <buffer> <leader>L :lua vim.lsp.codelens.refresh()<CR>
     autocmd Filetype haskell autocmd InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-" vim.lsp.buf.formatting()
-" vim.lsp.buf.rename() ?
-" print(vim.lsp.buf.server_ready())  
-
+    " vim.lsp.buf.formatting()
+    " vim.lsp.buf.rename() ?
+    " print(vim.lsp.buf.server_ready())  
     " autocmd Filetype haskell nnoremap <buffer> <leader>x :call LanguageClient#explainErrorAtPoint()<CR>
     autocmd Filetype haskell setlocal softtabstop=2
     autocmd Filetype haskell setlocal shiftwidth=2
     autocmd Filetype haskell setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
 augroup END
-
-
 " }}}
 
-" write current file as superuser
-cmap w!! SudoWrite
+" {{{ PLUGINS CONFIG
+
+let g:deoplete#enable_at_startup = 1
+
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 let g:fzf_layout = { 'down': '~40%' }
 
@@ -331,4 +323,5 @@ require('lspconfig').hls.setup
                  }
   }
 END
+" }}}
 " }}}
